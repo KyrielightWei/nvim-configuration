@@ -16,7 +16,7 @@
 if !exists('g:bundle_group')
 	let g:bundle_group = ['basic', 'tags', 'enhanced', 'filetypes', 'textobj']
 	let g:bundle_group += ['tags', 'airline', 'nerdtree', 'ale', 'echodoc']
-	let g:bundle_group += ['leaderf']
+	let g:bundle_group += ['leaderf','wei-self']
 endif
 
 
@@ -607,5 +607,23 @@ let g:ycm_filetype_whitelist = {
 			\ "zimbu":1,
 			\ "ps1":1,
 			\ }
+
+
+
+if index(g:bundle_group, 'wei-self') >= 0
+	"=== vim中文文档
+	Plug 'yianwillis/vimcdoc'
+	"=== nvim terminal 插件
+	"ALT + =: toggle terminal below.
+	"ALT + SHIFT + h: move to the window on the left.
+	"ALT + SHIFT + l: move to the window on the right.
+	"ALT + SHIFT + j: move to the window below.
+	"ALT + SHIFT + k: move to the window above.
+	"ALT + SHIFT + p: move to the previous window.
+	"ALT + -: paste register 0 to terminal.
+	"ALT + q: switch to terminal normal mode.
+	Plug 'skywind3000/vim-terminal-help'
+endif
+
 
 
