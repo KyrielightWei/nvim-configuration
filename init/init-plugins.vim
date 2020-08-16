@@ -538,7 +538,7 @@ endif
 if index(g:bundle_group,'coc') >= 0
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	let g:coc_config_home = s:path("tools/coc_config/")
-	let g:coc_global_extensions = ['coc-json']
+	let g:coc_global_extensions = ['coc-json','coc-marketplace','coc-vimlsp','coc-clangd','coc-cmake','coc-snippets']
 
 	" Use tab for trigger completion with characters ahead and navigate.
 	" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by

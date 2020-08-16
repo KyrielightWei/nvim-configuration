@@ -11,4 +11,4 @@ My Nvim Configuration
 ## pre
 + `python3 -m  pip install neovim-remote`
 + `python3 -m pip install --user --upgrade pynvim`
-
++ `curl -sL install-node.now.sh/lts | bash`
