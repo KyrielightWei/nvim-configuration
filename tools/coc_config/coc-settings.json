@@ -7,7 +7,8 @@
 		".hg",
 		".projections.json"
 	],
-	"diagnostic.enable": false,
+	"diagnostic.enable": true,
+	"diagnostic.displayByAle": true,
 	"suggest.completionItemKindLabels": {
 			"keyword": "\uf1de",
 			"variable": "\ue79b",

@@ -123,8 +123,8 @@ if index(g:bundle_group, 'basic') >= 0
 	nmap <m-e> <Plug>(choosewin)
 
 	" 默认不显示 startify
-	let g:startify_disable_at_vimenter = 1
-	let g:startify_session_dir = '~/.vim/session'
+	let g:startify_disable_at_vimenter = 0
+	let g:startify_session_dir = '~/.nvim/session'
 
 	" 使用 <space>ha 清除 errormarker 标注的错误
 	noremap <silent><space>ha :RemoveErrorMarkers<cr>
@@ -217,7 +217,7 @@ if index(g:bundle_group, 'tags') >= 0
 	let g:gutentags_ctags_extra_args += ['--c-kinds=+px']
 
 	" 使用 universal-ctags 的话需要下面这行，请反注释
-	" let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
+	let g:gutentags_ctags_extra_args += ['--output-format=e-ctags']
 
 	" 禁止 gutentags 自动链接 gtags 数据库
 	let g:gutentags_auto_add_gtags_cscope = 0
@@ -339,7 +339,9 @@ endif
 " ale：动态语法检查
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'ale') >= 0
-	Plug 'w0rp/ale'
+	Plug 'dense-analysis/ale'
+
+	let g:ale_disable_lsp = 1
 
 	" 设定延迟和提示信息
 	let g:ale_completion_delay = 500
@@ -531,7 +533,8 @@ if index(g:bundle_group, 'wei-self') >= 0
 	"ALT + -: paste register 0 to terminal.
 	"ALT + q: switch to terminal normal mode.
 	Plug 'skywind3000/vim-terminal-help'
-	Plug 'liuchengxu/vim-which-key'
+	Plug 'yegappan/mru'
+	"Plug 'liuchengxu/vim-which-key'
 
 endif
 
