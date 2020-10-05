@@ -41,7 +41,11 @@ LoadScript init/init-config.vim
 LoadScript init/init-tabsize.vim
 
 " 插件加载
+if exists('g:vscode')
+LoadScript vscode/vscode-plugin.vim
+else
 LoadScript init/init-plugins.vim
+endif
 
 " 界面样式
 LoadScript init/init-style.vim

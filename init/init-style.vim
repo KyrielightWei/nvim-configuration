@@ -47,11 +47,18 @@ set splitright
 set background=dark
 
 " 允许 256 色
-set t_Co=256
+" if has("termguicolors")
+"     " enable true color
+"     set termguicolors
+" else
+" 	set t_Co=256
+" endif
+set termguicolors
 
 " 设置颜色主题，会在所有 runtimepaths 的 colors 目录寻找同名配置
-color desert256
-
+"color desert256
+"set background=dark
+colorscheme gruvbox 
 
 "----------------------------------------------------------------------
 " 状态栏设置
@@ -92,7 +99,7 @@ endif
 hi! SignColumn guibg=NONE ctermbg=NONE
 
 " 修改行号为浅灰色，默认主题的黄色行号很难看，换主题可以仿照修改
-highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE 
+highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE
 	\ gui=NONE guifg=DarkGrey guibg=NONE
 
 " 修正补全目录的色彩：默认太难看
@@ -106,7 +113,7 @@ hi! PmenuSel guibg=gray guifg=brown ctermbg=brown ctermfg=gray
 if has('terminal') && exists(':terminal') == 2
 	if exists('##TerminalOpen')
 		augroup VimUnixTerminalGroup
-			au! 
+			au!
 			au TerminalOpen * setlocal nonumber signcolumn=no
 		augroup END
 	endif
@@ -174,7 +181,7 @@ function! Vim_NeatBuffer(bufnr, fullname)
 		if l:name == ''
 			return '[No Name]'
 		else
-			if a:fullname 
+			if a:fullname
 				return fnamemodify(l:name, ':p')
 			else
 				let aname = fnamemodify(l:name, ':p')
@@ -193,7 +200,7 @@ function! Vim_NeatBuffer(bufnr, fullname)
 		if l:buftype == 'quickfix'
 			return '[Quickfix]'
 		elseif l:name != ''
-			if a:fullname 
+			if a:fullname
 				return '-'.fnamemodify(l:name, ':p')
 			else
 				return '-'.fnamemodify(l:name, ':t')

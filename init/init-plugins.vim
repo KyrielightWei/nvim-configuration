@@ -15,10 +15,10 @@
 "----------------------------------------------------------------------
 if !exists('g:bundle_group')
 	let g:bundle_group = ['basic', 'tags', 'enhanced', 'filetypes', 'textobj']
-	let g:bundle_group += ['tags', 'airline', 'nerdtree', 'ale', 'echodoc']
-	let g:bundle_group += ['leaderf','wei-self','coc']
+	let g:bundle_group += ['tags', 'airline', 'ale', 'echodoc']
+	let g:bundle_group += ['leaderf','comments','wei-self','coc','coc-explore','coc-lsp']
 endif
-
+"'nerdtree'
 
 "----------------------------------------------------------------------
 " 计算当前 vim-init 的子路径
@@ -53,6 +53,9 @@ Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
 " Diff 增强，支持 histogram / patience 等更科学的 diff 算法
 Plug 'chrisbra/vim-diff-enhanced'
 
+" 括号和缩进显示
+Plug 'luochen1990/rainbow'
+Plug 'Yggdroot/indentLine'
 
 "----------------------------------------------------------------------
 " Dirvish 设置：自动排序并隐藏文件，同时定位到相关文件
@@ -95,7 +98,9 @@ if index(g:bundle_group, 'basic') >= 0
 	Plug 'mhinz/vim-startify'
 
 	" 一次性安装一大堆 colorscheme
-	Plug 'flazz/vim-colorschemes'
+	"Plug 'flazz/vim-colorschemes'
+	Plug 'morhetz/gruvbox'
+	"Plug 'NLKNguyen/papercolor-theme'
 
 	" 支持库，给其他插件用的函数库
 	Plug 'xolox/vim-misc'
@@ -286,6 +291,7 @@ endif
 if index(g:bundle_group, 'airline') >= 0
 	Plug 'vim-airline/vim-airline'
 	Plug 'vim-airline/vim-airline-themes'
+	let g:airline_theme = 'fruit_punch'
 	let g:airline_left_sep = ''
 	let g:airline_left_alt_sep = ''
 	let g:airline_right_sep = ''
@@ -293,7 +299,7 @@ if index(g:bundle_group, 'airline') >= 0
 	let g:airline_powerline_fonts = 0
 	let g:airline_exclude_preview = 1
 	let g:airline_section_b = '%n'
-	let g:airline_theme='deus'
+	"let g:airline_theme='deus'
 	let g:airline#extensions#branch#enabled = 0
 	let g:airline#extensions#syntastic#enabled = 0
 	let g:airline#extensions#fugitiveline#enabled = 0
@@ -519,10 +525,30 @@ if index(g:bundle_group, 'leaderf') >= 0
 	endif
 endif
 
+if index(g:bundle_group, 'comments') >= 0
+	Plug 'preservim/nerdcommenter'
+
+	" Add spaces after comment delimiters by default
+	let g:NERDSpaceDelims = 1
+	" Use compact syntax for prettified multi-line comments
+	let g:NERDCompactSexyComs = 1
+	" Align line-wise comment delimiters flush left instead of following code indentation
+	let g:NERDDefaultAlign = 'left'
+	" Set a language to use its alternate delimiters by default
+	let g:NERDAltDelims_java = 1
+	" Add your own custom formats or override the defaults
+	let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+	" Allow commenting and inverting empty lines (useful when commenting a region)
+	let g:NERDCommentEmptyLines = 1
+	" Enable trimming of trailing whitespace when uncommenting
+	let g:NERDTrimTrailingWhitespace = 1
+	" Enable NERDCommenterToggle to check all selected lines is commented or not 
+	let g:NERDToggleCheckAllLines = 1
+endif
 
 if index(g:bundle_group, 'wei-self') >= 0
 	"=== vim中文文档
-	Plug 'yianwillis/vimcdoc'
+	"Plug 'yianwillis/vimcdoc'
 	"=== nvim terminal 插件
 	"ALT + =: toggle terminal below.
 	"ALT + SHIFT + h: move to the window on the left.
@@ -533,7 +559,8 @@ if index(g:bundle_group, 'wei-self') >= 0
 	"ALT + -: paste register 0 to terminal.
 	"ALT + q: switch to terminal normal mode.
 	Plug 'skywind3000/vim-terminal-help'
-	Plug 'yegappan/mru'
+	let g:terminal_shell = 'bash'
+	"Plug 'yegappan/mru'
 	"Plug 'liuchengxu/vim-which-key'
 
 endif
@@ -541,7 +568,7 @@ endif
 if index(g:bundle_group,'coc') >= 0
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	let g:coc_config_home = s:path("tools/coc_config/")
-	let g:coc_global_extensions = ['coc-json','coc-marketplace','coc-vimlsp','coc-clangd','coc-cmake','coc-snippets']
+	let g:coc_global_extensions = ['coc-json','coc-marketplace','coc-vimlsp','coc-clangd','coc-cmake','coc-snippets','coc-tag']
 
 	" Use tab for trigger completion with characters ahead and navigate.
 	" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -657,7 +684,7 @@ if index(g:bundle_group,'coc') >= 0
 	" Show all diagnostics.
 	nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
 	" Manage extensions.
-	nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
+	nnoremap <silent><nowait> <space>m  :<C-u>CocList marketplace<cr>
 	" Show commands.
 	nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
 	" Find symbol of current document.
@@ -673,6 +700,14 @@ if index(g:bundle_group,'coc') >= 0
 
 endif
 
+if index(g:bundle_group,'coc-explore') >= 0
+	let g:coc_global_extensions+= ['coc-explorer']
+	nnoremap <space>e :CocCommand explorer<CR>
+endif
+
+if index(g:bundle_group, 'coc-lsp') >= 0
+	let g:coc_global_extensions+= ['coc-go','coc-rls']
+endif
 "----------------------------------------------------------------------
 " 结束插件安装
 "----------------------------------------------------------------------
