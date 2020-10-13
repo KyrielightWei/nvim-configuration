@@ -533,7 +533,7 @@ if index(g:bundle_group, 'wei-self') >= 0
 	"ALT + -: paste register 0 to terminal.
 	"ALT + q: switch to terminal normal mode.
 	Plug 'skywind3000/vim-terminal-help'
-	Plug 'yegappan/mru'
+	"Plug 'yegappan/mru'
 	"Plug 'liuchengxu/vim-which-key'
 
 endif
