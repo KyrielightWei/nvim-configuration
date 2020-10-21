@@ -223,6 +223,28 @@ if index(g:bundle_group, 'tags') >= 0
 
 	" 禁止 gutentags 自动链接 gtags 数据库
 	let g:gutentags_auto_add_gtags_cscope = 0
+
+	let g:gutentags_plus_nomap = 1
+	" Find symbol (reference) under cursor
+	noremap <silent> <leader>gs :GscopeFind s <C-R><C-W><cr> 
+	" Find symbol definition under cursor
+	noremap <silent> <leader>gg :GscopeFind g <C-R><C-W><cr>
+	" Functions called by this function
+	noremap <silent> <leader>gd :GscopeFind d <C-R><C-W><cr>
+	" Functions calling this function
+	noremap <silent> <leader>gc :GscopeFind c <C-R><C-W><cr>
+	" Find text string under cursor
+	noremap <silent> <leader>gt :GscopeFind t <C-R><C-W><cr>
+	" Find egrep pattern under cursor
+	noremap <silent> <leader>ge :GscopeFind e <C-R><C-W><cr>
+	" Find file name under cursor
+	noremap <silent> <leader>gf :GscopeFind f <C-R>=expand("<cfile>")<cr><cr>
+	" Find files #including the file name under cursor
+	noremap <silent> <leader>gi :GscopeFind i <C-R>=expand("<cfile>")<cr><cr>
+	" Find places where current symbol is assigned
+	noremap <silent> <leader>ga :GscopeFind a <C-R><C-W><cr>
+	" Find current word in ctags database
+	noremap <silent> <leader>gz :GscopeFind z <C-R><C-W><cr>
 endif
 
 
@@ -594,6 +616,9 @@ if index(g:bundle_group,'coc') >= 0
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	let g:coc_config_home = s:path("tools/coc_config/")
 	let g:coc_global_extensions = ['coc-json','coc-marketplace','coc-vimlsp','coc-clangd','coc-cmake','coc-snippets','coc-tag']
+	let g:coc_global_extensions += ['coc-highlight','coc-bookmark','coc-git']
+
+	autocmd CursorHold * silent call CocActionAsync('highlight')
 
 	" Use tab for trigger completion with characters ahead and navigate.
 	" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
