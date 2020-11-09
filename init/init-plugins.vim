@@ -332,24 +332,45 @@ endif
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'lightline') >= 0
 	 Plug 'itchyny/lightline.vim'
+	 Plug 'maximbaz/lightline-ale'
+	 
 	 let g:lightline = {
 	  \ 'colorscheme': 'material_vim',
 	  \ 'active': {
 	  \   'left': [ [ 'mode', 'paste' ],
-	  \             [ 'readonly', 'filename', 'modified']],
+	  \             [ 'readonly', 'filename', 'modified'],
+	  \				['bufstate','gitbranch','cocstatus']],
 	  \   'right': [ ['lineinfo' ],
 	  \              [ 'percent' ],
-	  \              [ 'fileformat', 'fileencoding', 'filetype']],
+	  \              [ 'fileformat', 'fileencoding', 'filetype'],
+	  \				 [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_infos', 'linter_ok' ]],
 	  \ },
 	  \ 'component': {
-	  \  'lineinfo':'%3l:%-2c>%L'
+	  \  'bufstate':'[%1*%M%*%n%R%H]',
+	  \  'lineinfo':'%l:%c > %L'
 	  \},
 	  \ 'component_function': {
+	  \   'cocstatus': 'coc#status',
 	  \   'gitbranch': 'FugitiveHead'
-	  \ }
-	  \ }
+	  \ },
+	  \ 'component_expand': {
+      \  'linter_checking': 'lightline#ale#checking',
+      \  'linter_infos': 'lightline#ale#infos',
+      \  'linter_warnings': 'lightline#ale#warnings',
+      \  'linter_errors': 'lightline#ale#errors',
+      \  'linter_ok': 'lightline#ale#ok',
+      \ },
+	  \ 'component_type' : {
+      \     'linter_checking': 'right',
+      \     'linter_infos': 'right',
+      \     'linter_warnings': 'warning',
+      \     'linter_errors': 'error',
+      \     'linter_ok': 'right',
+      \ }
+	  \ }	
 
-endif
+	  autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
+ endif
 
 "----------------------------------------------------------------------
 " NERDTree
@@ -409,7 +430,7 @@ if index(g:bundle_group, 'ale') >= 0
 	endif
 
 	" 允许 airline 集成
-	let g:airline#extensions#ale#enabled = 1
+	"let g:airline#extensions#ale#enabled = 1
 
 	" 编辑不同文件类型需要的语法检查器
 	let g:ale_linters = {
@@ -420,6 +441,7 @@ if index(g:bundle_group, 'ale') >= 0
 				\ 'go': ['go build', 'gofmt'],
 				\ 'java': ['javac'],
 				\ 'javascript': ['eslint'],
+				\ 'rust' : ['rls','cargo','rustc']
 				\ }
 
 
@@ -871,7 +893,4 @@ let g:ycm_filetype_whitelist = {
 			\ "zimbu":1,
 			\ "ps1":1,
 			\ }
-
-
-
 
