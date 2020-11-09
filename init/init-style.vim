@@ -58,19 +58,22 @@ set termguicolors
 " 设置颜色主题，会在所有 runtimepaths 的 colors 目录寻找同名配置
 "color desert256
 "set background=dark
-colorscheme gruvbox 
+"colorscheme landscape 
+let g:material_terminal_italics = 1
+let g:material_theme_style = 'dark'
+colorscheme material
 
 "----------------------------------------------------------------------
 " 状态栏设置
 "----------------------------------------------------------------------
-set statusline=                                 " 清空状态了
-set statusline+=\ %F                            " 文件名
-set statusline+=\ [%1*%M%*%n%R%H]               " buffer 编号和状态
-set statusline+=%=                              " 向右对齐
-set statusline+=\ %y                            " 文件类型
-
-" 最右边显示文件编码和行号等信息，并且固定在一个 group 中，优先占位
-set statusline+=\ %0(%{&fileformat}\ [%{(&fenc==\"\"?&enc:&fenc).(&bomb?\",BOM\":\"\")}]\ %v:%l/%L%)
+" set statusline=                                 " 清空状态了
+" set statusline+=\ %F                            " 文件名
+" set statusline+=\ [%1*%M%*%n%R%H]               " buffer 编号和状态
+" set statusline+=%=                              " 向右对齐
+" set statusline+=\ %y                            " 文件类型
+"
+" " 最右边显示文件编码和行号等信息，并且固定在一个 group 中，优先占位
+" set statusline+=\ %0(%{&fileformat}\ [%{(&fenc==\"\"?&enc:&fenc).(&bomb?\",BOM\":\"\")}]\ %v:%l/%L%)
 
 
 "----------------------------------------------------------------------

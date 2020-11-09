@@ -15,7 +15,7 @@
 "----------------------------------------------------------------------
 if !exists('g:bundle_group')
 	let g:bundle_group = ['basic', 'tags', 'enhanced', 'filetypes', 'textobj']
-	let g:bundle_group += ['tags', 'airline', 'ale', 'echodoc']
+	let g:bundle_group += ['tags', 'lightline' , 'ale', 'echodoc']
 	let g:bundle_group += ['leaderf','comments','wei-self','coc','coc-explore','coc-lsp']
 endif
 "'nerdtree'
@@ -94,10 +94,11 @@ if index(g:bundle_group, 'basic') >= 0
 	Plug 'mhinz/vim-startify'
 
 	" 一次性安装一大堆 colorscheme
-	"Plug 'flazz/vim-colorschemes'
+	" Plug 'flazz/vim-colorschemes'
 	Plug 'morhetz/gruvbox'
-	"Plug 'NLKNguyen/papercolor-theme'
-	let g:gruvbox_termcolors=256
+	Plug 'itchyny/landscape.vim'
+	Plug 'kaicataldo/material.vim'
+	Plug 'rakr/vim-one'
 
 	" 支持库，给其他插件用的函数库
 	Plug 'xolox/vim-misc'
@@ -326,6 +327,29 @@ if index(g:bundle_group, 'airline') >= 0
 	let g:airline#extensions#vimagit#enabled = 0
 endif
 
+"----------------------------------------------------------------------
+" lightline
+"----------------------------------------------------------------------
+if index(g:bundle_group, 'lightline') >= 0
+	 Plug 'itchyny/lightline.vim'
+	 let g:lightline = {
+	  \ 'colorscheme': 'material_vim',
+	  \ 'active': {
+	  \   'left': [ [ 'mode', 'paste' ],
+	  \             [ 'readonly', 'filename', 'modified']],
+	  \   'right': [ ['lineinfo' ],
+	  \              [ 'percent' ],
+	  \              [ 'fileformat', 'fileencoding', 'filetype']],
+	  \ },
+	  \ 'component': {
+	  \  'lineinfo':'%3l:%-2c>%L'
+	  \},
+	  \ 'component_function': {
+	  \   'gitbranch': 'FugitiveHead'
+	  \ }
+	  \ }
+
+endif
 
 "----------------------------------------------------------------------
 " NERDTree
