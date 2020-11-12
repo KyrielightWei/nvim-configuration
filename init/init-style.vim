@@ -44,7 +44,7 @@ set splitright
 "----------------------------------------------------------------------
 
 " 设置黑色背景
-set background=dark
+set background=light
 
 " 允许 256 色
 " if has("termguicolors")
@@ -56,12 +56,7 @@ set background=dark
 set termguicolors
 
 " 设置颜色主题，会在所有 runtimepaths 的 colors 目录寻找同名配置
-"color desert256
-"set background=dark
-"colorscheme landscape 
-let g:material_terminal_italics = 1
-let g:material_theme_style = 'dark'
-colorscheme material
+colorscheme PaperColor
 
 "----------------------------------------------------------------------
 " 状态栏设置

@@ -14,9 +14,9 @@
 " 默认情况下的分组，可以再前面覆盖之
 "----------------------------------------------------------------------
 if !exists('g:bundle_group')
-	let g:bundle_group = ['basic', 'tags', 'enhanced', 'filetypes', 'textobj']
+	let g:bundle_group = ['basic', 'colorscheme' , 'tags', 'enhanced', 'filetypes', 'textobj']
 	let g:bundle_group += ['tags', 'lightline' , 'ale', 'echodoc']
-	let g:bundle_group += ['leaderf','comments','wei-self','coc','coc-explore','coc-lsp']
+	let g:bundle_group += ['leaderf','comments','wei-self','coc','coc-explore','coc-lsp','async']
 endif
 "'nerdtree'
 
@@ -93,13 +93,6 @@ if index(g:bundle_group, 'basic') >= 0
 	" 展示开始画面，显示最近编辑过的文件
 	Plug 'mhinz/vim-startify'
 
-	" 一次性安装一大堆 colorscheme
-	" Plug 'flazz/vim-colorschemes'
-	Plug 'morhetz/gruvbox'
-	Plug 'itchyny/landscape.vim'
-	Plug 'kaicataldo/material.vim'
-	Plug 'rakr/vim-one'
-
 	" 支持库，给其他插件用的函数库
 	Plug 'xolox/vim-misc'
 
@@ -146,6 +139,36 @@ if index(g:bundle_group, 'basic') >= 0
 			\}
 endif
 
+if index(g:bundle_group, 'basic') >= 0
+
+	" 一次性安装一大堆 colorscheme
+	" Plug 'flazz/vim-colorschemes'
+	Plug 'morhetz/gruvbox'
+	Plug 'itchyny/landscape.vim'
+	Plug 'kaicataldo/material.vim'
+	Plug 'rakr/vim-one'
+	Plug 'NLKNguyen/papercolor-theme'
+
+	let g:PaperColor_Theme_Options = {
+		\   'theme': { 
+		\     'default': { 
+		\       'allow_bold': 1,
+		\		'allow_italic' : 1
+		\     } 
+		\   },	
+		\'language' : {
+			\'python':{
+			\   'highlight_builtins' : 1
+			\},
+			\'cpp':{
+			\	'highlight_standard_library': 1
+			\},
+			\'c':{
+			\	'highlight_builtins' : 1
+			\}
+		\}
+	\}
+endif
 
 "----------------------------------------------------------------------
 " 增强插件
@@ -282,6 +305,13 @@ endif
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'filetypes') >= 0
 
+	" syntax highlight
+	Plug 'pboettch/vim-cmake-syntax'
+	Plug 'plasticboy/vim-markdown'
+	Plug 'elzr/vim-json'
+	Plug 'pangloss/vim-javascript'
+	Plug 'fatih/vim-go'
+
 	" powershell 脚本文件的语法高亮
 	Plug 'pprovost/vim-ps1', { 'for': 'ps1' }
 
@@ -335,7 +365,7 @@ if index(g:bundle_group, 'lightline') >= 0
 	 Plug 'maximbaz/lightline-ale'
 	 
 	 let g:lightline = {
-	  \ 'colorscheme': 'material_vim',
+	  \ 'colorscheme': 'PaperColor',
 	  \ 'active': {
 	  \   'left': [ [ 'mode', 'paste' ],
 	  \             [ 'readonly', 'filename', 'modified'],
@@ -655,7 +685,7 @@ if index(g:bundle_group, 'wei-self') >= 0
 	\}
 
 	" 缩进显示
-	Plug 'Yggdroot/indentLine'
+	"Plug 'Yggdroot/indentLine'
 endif
 
 if index(g:bundle_group,'coc') >= 0
@@ -804,6 +834,13 @@ endif
 if index(g:bundle_group, 'coc-lsp') >= 0
 	let g:coc_global_extensions+= ['coc-go','coc-rls']
 endif
+
+if index(g:bundle_group, 'async') >= 0
+	Plug 'skywind3000/asynctasks.vim'
+	Plug 'skywind3000/asyncrun.vim'
+	let g:asyncrun_open = 6
+endif
+
 "----------------------------------------------------------------------
 " 结束插件安装
 "----------------------------------------------------------------------

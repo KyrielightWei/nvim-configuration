@@ -35,5 +35,7 @@
 			"snippet": "\ue60b",
 			"typeParameter": "\uf728",
 			"default": "\uf29c"
-	}
+	},
+	"explorer.position": "floating" ,
+	"explorer.file.showHiddenFiles": true
 }
