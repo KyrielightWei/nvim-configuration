@@ -685,7 +685,7 @@ if index(g:bundle_group, 'wei-self') >= 0
 	\}
 
 	" 缩进显示
-	"Plug 'Yggdroot/indentLine'
+	Plug 'Yggdroot/indentLine'
 endif
 
 if index(g:bundle_group,'coc') >= 0
