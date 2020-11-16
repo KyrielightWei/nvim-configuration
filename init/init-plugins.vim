@@ -320,7 +320,7 @@ if index(g:bundle_group, 'filetypes') >= 0
 
 	" C++ 语法高亮增强，支持 11/14/17 标准
 	Plug 'octol/vim-cpp-enhanced-highlight', { 'for': ['c', 'cpp'] }
-
+	
 	" 额外语法文件
 	Plug 'justinmk/vim-syntax-extra', { 'for': ['c', 'bison', 'flex', 'cpp'] }
 
@@ -690,6 +690,7 @@ endif
 
 if index(g:bundle_group,'coc') >= 0
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
+	Plug 'jackguo380/vim-lsp-cxx-highlight'
 	let g:coc_config_home = s:path("tools/coc_config/")
 	let g:coc_global_extensions = ['coc-json','coc-marketplace','coc-vimlsp','coc-clangd','coc-cmake','coc-snippets','coc-tag']
 	let g:coc_global_extensions += ['coc-highlight','coc-bookmark','coc-git']

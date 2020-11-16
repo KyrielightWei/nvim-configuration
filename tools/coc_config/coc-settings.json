@@ -7,6 +7,12 @@
 		".hg",
 		".projections.json"
 	],
+	"clangd.showDBChangedNotification": true,
+	"clangd.compilationDatabasePath": "build",
+	"clangd.semanticHighlighting": true,
+	"coc.preferences.colorSupport": true,
+	"coc.preferences.floatActions": true,
+	"coc.source.file.ignoreHidden": false,
 	"diagnostic.enable": true,
 	"diagnostic.displayByAle": true,
 	"suggest.completionItemKindLabels": {
