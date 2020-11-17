@@ -8,7 +8,6 @@
 		".projections.json"
 	],
 	"clangd.showDBChangedNotification": true,
-	"clangd.compilationDatabasePath": "build",
 	"clangd.semanticHighlighting": true,
 	"coc.preferences.colorSupport": true,
 	"coc.preferences.floatActions": true,
