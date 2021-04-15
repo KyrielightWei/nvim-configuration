@@ -47,16 +47,17 @@ set splitright
 set background=dark
 
 " 允许 256 色
-" if has("termguicolors")
-"     " enable true color
-"     set termguicolors
-" else
-" 	set t_Co=256
-" endif
-set termguicolors
+if has("termguicolors")
+		" enable true color
+		set termguicolors
+else
+	set t_Co=256
+endif
+" set termguicolors
 
 " 设置颜色主题，会在所有 runtimepaths 的 colors 目录寻找同名配置
-colorscheme PaperColor
+colorscheme gruvbox
+
 
 "----------------------------------------------------------------------
 " 状态栏设置
@@ -101,8 +102,8 @@ highlight LineNr term=bold cterm=NONE ctermfg=DarkGrey ctermbg=NONE
 	\ gui=NONE guifg=DarkGrey guibg=NONE
 
 " 修正补全目录的色彩：默认太难看
-hi! Pmenu guibg=gray guifg=black ctermbg=gray ctermfg=black
-hi! PmenuSel guibg=gray guifg=brown ctermbg=brown ctermfg=gray
+hi! Pmenu guibg=gray guifg=cyan ctermbg=red ctermfg=56
+hi! PmenuSel guibg=gray guifg=brown ctermbg=red ctermfg=56
 
 
 "----------------------------------------------------------------------
