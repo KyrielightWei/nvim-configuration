@@ -7,6 +7,31 @@
 		".hg",
 		".projections.json"
 	],
+  "languageserver": {
+      "ccls": {
+  		      "command": "ccls",
+  		      "filetypes": ["c", "cpp", "ipp", "objc", "objcpp"],
+  		      "rootPatterns": ["compile_commands.json", ".ccls"],
+  		      "initializationOptions": {
+  					        "cache": {
+  									          "retainInMemory": 2
+  									        },
+  					        "index": {
+  									          "threads": 32
+  									        },
+  					        "completion": {
+  									          "caseSensitivity": 2
+  									        },
+  					        "highlight": {
+  									          "lsRanges" : true
+  									        }
+  					      }
+  		    }
+    },
+	  "  diagnostic.enableSign": false,
+		  "coc.source.around.firstMatch": false,
+			"coc.source.buffer.firstMatch": false,
+			"coc.preferences.hoverTarget": "float",
 	"clangd.showDBChangedNotification": true,
 	"clangd.semanticHighlighting": true,
 	"coc.preferences.colorSupport": true,

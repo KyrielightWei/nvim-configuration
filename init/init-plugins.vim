@@ -148,6 +148,7 @@ if index(g:bundle_group, 'basic') >= 0
 	Plug 'kaicataldo/material.vim'
 	Plug 'rakr/vim-one'
 	Plug 'NLKNguyen/papercolor-theme'
+	Plug 'sonph/onehalf', { 'rtp': 'vim' }
 
 	let g:PaperColor_Theme_Options = {
 		\   'theme': { 
@@ -365,7 +366,7 @@ if index(g:bundle_group, 'lightline') >= 0
 	 Plug 'maximbaz/lightline-ale'
 	 
 	 let g:lightline = {
-	  \ 'colorscheme': 'PaperColor',
+	  \ 'colorscheme': 'gruvbox',
 	  \ 'active': {
 	  \   'left': [ [ 'mode', 'paste' ],
 	  \             [ 'readonly', 'filename', 'modified'],
@@ -381,7 +382,7 @@ if index(g:bundle_group, 'lightline') >= 0
 	  \},
 	  \ 'component_function': {
 	  \   'cocstatus': 'coc#status',
-	  \   'gitbranch': 'FugitiveHead'
+	  \   'gitbranch': 'FugitiveHead',
 	  \ },
 	  \ 'component_expand': {
       \  'linter_checking': 'lightline#ale#checking',
@@ -692,8 +693,8 @@ if index(g:bundle_group,'coc') >= 0
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	Plug 'jackguo380/vim-lsp-cxx-highlight'
 	let g:coc_config_home = s:path("tools/coc_config/")
-	let g:coc_global_extensions = ['coc-json','coc-marketplace','coc-vimlsp','coc-clangd','coc-cmake','coc-snippets','coc-tag']
-	let g:coc_global_extensions += ['coc-highlight','coc-bookmark','coc-git']
+	let g:coc_global_extensions = ['coc-json','coc-marketplace','coc-vimlsp','coc-cmake','coc-snippets','coc-tag']
+	let g:coc_global_extensions += ['coc-highlight','coc-git']
 
 	autocmd CursorHold * silent call CocActionAsync('highlight')
 
