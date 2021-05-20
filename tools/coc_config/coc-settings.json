@@ -36,6 +36,7 @@
 	"clangd.semanticHighlighting": true,
 	"coc.preferences.colorSupport": true,
 	"coc.preferences.floatActions": true,
+	"coc.preferences.currentFunctionSymbolAutoUpdate": true,
 	"coc.source.file.ignoreHidden": false,
 	"diagnostic.enable": true,
 	"diagnostic.displayByAle": true,
@@ -66,6 +67,7 @@
 			"typeParameter": "\uf728",
 			"default": "\uf29c"
 	},
+	"suggest.floatEnable": true,
 	"explorer.position": "floating" ,
 	"explorer.file.showHiddenFiles": true
 }

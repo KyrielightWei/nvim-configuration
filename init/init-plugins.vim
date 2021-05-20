@@ -361,16 +361,21 @@ endif
 "----------------------------------------------------------------------
 " lightline
 "----------------------------------------------------------------------
+
 if index(g:bundle_group, 'lightline') >= 0
 	 Plug 'itchyny/lightline.vim'
 	 Plug 'maximbaz/lightline-ale'
 	 
+		function! CocCurrentFunction()
+			    return get(b:, 'coc_current_function', '')
+		endfunction
+
 	 let g:lightline = {
 	  \ 'colorscheme': 'gruvbox',
 	  \ 'active': {
 	  \   'left': [ [ 'mode', 'paste' ],
 	  \             [ 'readonly', 'filename', 'modified'],
-	  \				['bufstate','gitbranch','cocstatus']],
+	  \				['bufstate','gitbranch','cocstatus','coc-cur-function']],
 	  \   'right': [ ['lineinfo' ],
 	  \              [ 'percent' ],
 	  \              [ 'fileformat', 'fileencoding', 'filetype'],
@@ -381,6 +386,7 @@ if index(g:bundle_group, 'lightline') >= 0
 	  \  'lineinfo':'%l:%c > %L'
 	  \},
 	  \ 'component_function': {
+		\   'coc-cur-function':'CocCurrentFunction',
 	  \   'cocstatus': 'coc#status',
 	  \   'gitbranch': 'FugitiveHead',
 	  \ },
@@ -693,7 +699,7 @@ if index(g:bundle_group,'coc') >= 0
 	Plug 'neoclide/coc.nvim', {'branch': 'release'}
 	Plug 'jackguo380/vim-lsp-cxx-highlight'
 	let g:coc_config_home = s:path("tools/coc_config/")
-	let g:coc_global_extensions = ['coc-json','coc-marketplace','coc-vimlsp','coc-cmake','coc-snippets','coc-tag']
+	let g:coc_global_extensions = ['coc-lists','coc-json','coc-marketplace','coc-vimlsp','coc-cmake','coc-snippets','coc-tag']
 	let g:coc_global_extensions += ['coc-highlight','coc-git']
 
 	autocmd CursorHold * silent call CocActionAsync('highlight')
@@ -736,8 +742,9 @@ if index(g:bundle_group,'coc') >= 0
 	" GoTo code navigation.
 	nmap <silent> gd <Plug>(coc-definition)
 	nmap <silent> gy <Plug>(coc-type-definition)
+	nmap <silent> gc <Plug>(coc-declaration) 
 	nmap <silent> gi <Plug>(coc-implementation)
-	nmap <silent> gr <Plug>(coc-references)
+	nmap <silent> gr <Plug>(coc-references-used)
 
 	" Use K to show documentation in preview window.
 	nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -817,8 +824,12 @@ if index(g:bundle_group,'coc') >= 0
 	nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
 	" Find symbol of current document.
 	nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
+  " show jump locations
+	nnoremap <silent><nowait> <space>l :<C-u>CocList location<cr>
 	" Search workspace symbols.
 	nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
+	" Search files
+	nnoremap <silent><nowait> <space>f  :<C-u>CocList files<cr>
 	" Do default action for next item.
 	nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 	" Do default action for previous item.
