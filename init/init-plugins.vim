@@ -693,6 +693,13 @@ if index(g:bundle_group, 'wei-self') >= 0
 
 	" 缩进显示
 	Plug 'Yggdroot/indentLine'
+
+	" ccls callHierarchy
+	Plug 'm-pilia/vim-ccls'
+	let g:ccls_size = 30
+	let g:ccls_position = 'botright'
+	let g:ccls_orientation = 'horizontal'
+
 endif
 
 if index(g:bundle_group,'coc') >= 0

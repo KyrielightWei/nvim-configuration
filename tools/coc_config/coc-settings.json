@@ -10,21 +10,25 @@
   "languageserver": {
       "ccls": {
   		      "command": "ccls",
-  		      "filetypes": ["c", "cpp", "ipp", "objc", "objcpp"],
-  		      "rootPatterns": ["compile_commands.json", ".ccls"],
+  		      "filetypes": ["c", "cpp", "ipp", "cuda","ic","objc", "objcpp"],
+  		      "rootPatterns": ["compile_commands.json", ".ccls",".git",".svn"],
   		      "initializationOptions": {
   					        "cache": {
+										  "directory":".tmp/ccls_cache/",
   									          "retainInMemory": 2
   									        },
   					        "index": {
-  									          "threads": 32
+  									          "threads": 0
   									        },
   					        "completion": {
   									          "caseSensitivity": 2
   									        },
   					        "highlight": {
   									          "lsRanges" : true
-  									        }
+  									        },
+						"client" : {
+										  "snippetSupport":true
+										}
   					      }
   		    }
     },
