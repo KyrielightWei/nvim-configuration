@@ -375,20 +375,21 @@ if index(g:bundle_group, 'lightline') >= 0
 	  \ 'active': {
 	  \   'left': [ [ 'mode', 'paste' ],
 	  \             [ 'readonly', 'filename', 'modified'],
-	  \				['bufstate','gitbranch','cocstatus','coc-cur-function']],
+	  \				['bufstate','gitbranch','cocstatus','gitblame']],
 	  \   'right': [ ['lineinfo' ],
 	  \              [ 'percent' ],
 	  \              [ 'fileformat', 'fileencoding', 'filetype'],
-	  \				 [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_infos', 'linter_ok' ]],
+	  \				 [ 'linter_checking', 'linter_errors', 'linter_warnings', 'linter_infos', 'linter_ok' ],['coc_current_function']],
 	  \ },
 	  \ 'component': {
 	  \  'bufstate':'[%1*%M%*%n%R%H]',
 	  \  'lineinfo':'%l:%c > %L'
 	  \},
 	  \ 'component_function': {
-		\   'coc-cur-function':'CocCurrentFunction',
+		\   'coc_current_function':'CocCurrentFunction',
 	  \   'cocstatus': 'coc#status',
 	  \   'gitbranch': 'FugitiveHead',
+		\		'gitblame' : 'LightlineGitBlame',
 	  \ },
 	  \ 'component_expand': {
       \  'linter_checking': 'lightline#ale#checking',
@@ -407,6 +408,13 @@ if index(g:bundle_group, 'lightline') >= 0
 	  \ }	
 
 	  autocmd User CocStatusChange,CocDiagnosticChange call lightline#update()
+
+		function! LightlineGitBlame() abort
+			let blame = get(b:, 'coc_git_blame', '')
+			" return blame
+			return winwidth(0) > 100 ? blame : 'blame info over 100'
+		endfunction
+
  endif
 
 "----------------------------------------------------------------------

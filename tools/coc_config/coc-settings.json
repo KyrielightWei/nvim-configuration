@@ -73,5 +73,7 @@
 	},
 	"suggest.floatEnable": true,
 	"explorer.position": "floating" ,
-	"explorer.file.showHiddenFiles": true
+	"explorer.file.showHiddenFiles": true,
+  "git.addGBlameToBufferVar": false,
+  "git.addGBlameToVirtualText": true
 }

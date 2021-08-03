@@ -20,7 +20,7 @@ set sw=2
 set ts=2
 
 " 禁止展开 tab (noexpandtab)
-set noet
+set expandtab
 
 " 如果后面设置了 expandtab 那么展开 tab 为多少字符
 set softtabstop=2
