@@ -708,6 +708,55 @@ if index(g:bundle_group, 'wei-self') >= 0
 	let g:ccls_position = 'botright'
 	let g:ccls_orientation = 'horizontal'
 
+  " clang-format tool
+  " Plug 'kana/vim-operator-user'
+  " Plug 'rhysd/vim-clang-format'
+  " autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
+  " let g:clang_format#style_options = "LLVM"
+  " " let g:clang_format#style_options = {
+  " "           \ "AccessModifierOffset" : -2,
+  " "           \ "AlignAfterOpenBracket" : "align",
+  " "           \ }
+
+  Plug 'sbdchd/neoformat'
+  let g:neoformat_cpp_clangformat = {
+    \ 'exe': 'clang-format',
+    \ 'args': ['--style="{
+    \           BasedOnStyle: LLVM,
+    \           AccessModifierOffset: -2,
+    \           AlignEscapedNewlines: Left,
+    \           AlignOperands : true,
+    \           AlwaysBreakTemplateDeclarations: true,
+    \           BinPackArguments: true,
+    \           BinPackParameters: false,
+    \           BreakBeforeBinaryOperators: NonAssignment,
+    \           Standard: Auto,
+    \           IndentWidth: 2,
+    \           BreakBeforeBraces: Custom,
+    \           BraceWrapping:
+    \              {AfterClass:      false,
+    \              AfterControlStatement: false,
+    \              AfterEnum:       false,
+    \              AfterFunction:   true,
+    \              AfterNamespace:  false,
+    \              AfterObjCDeclaration: false,
+    \              AfterStruct:     false,
+    \              AfterUnion:      false,
+    \              AfterExternBlock: false,
+    \              BeforeCatch:     false,
+    \              BeforeElse:      false,
+    \              IndentBraces:    false,
+    \              SplitEmptyFunction: false,
+    \              SplitEmptyRecord: false,
+    \              SplitEmptyNamespace: false},
+    \           ColumnLimit: 100,
+    \           AllowAllParametersOfDeclarationOnNextLine: false,
+    \           AlignAfterOpenBracket: true}"'],
+    \ 'stdin' : 1,
+    \ 'stderr' : 1,
+  \}
+  let g:neoformat_enabled_cpp = ['clangformat']
+  let g:neoformat_enabled_c = ['clangformat']
 endif
 
 if index(g:bundle_group,'coc') >= 0

@@ -42,6 +42,7 @@
 	"coc.preferences.floatActions": true,
 	"coc.preferences.currentFunctionSymbolAutoUpdate": true,
 	"coc.source.file.ignoreHidden": false,
+  "coc.preferences.formatOnType": true,
 	"diagnostic.enable": true,
 	"diagnostic.displayByAle": true,
 	"suggest.completionItemKindLabels": {
