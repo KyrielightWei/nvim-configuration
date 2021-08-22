@@ -34,7 +34,7 @@ endfunc
 "----------------------------------------------------------------------
 " 在 ~/.nvim/bundles 下安装插件
 "----------------------------------------------------------------------
-call plug#begin(get(g:, 'bundle_home', '~/.nvim/bundles'))
+call plug#begin(get(g:, 'bundle_home', '~/.config/nvim-plugins'))
 
 
 "----------------------------------------------------------------------
@@ -90,9 +90,6 @@ augroup END
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'basic') >= 0
 
-	" 展示开始画面，显示最近编辑过的文件
-	Plug 'mhinz/vim-startify'
-
 	" 支持库，给其他插件用的函数库
 	Plug 'xolox/vim-misc'
 
@@ -110,17 +107,14 @@ if index(g:bundle_group, 'basic') >= 0
 	Plug 't9md/vim-choosewin'
 
 	" 提供基于 TAGS 的定义预览，函数参数预览，quickfix 预览
-	Plug 'skywind3000/vim-preview'
+  " Plug 'skywind3000/vim-quickui'
+	" Plug 'skywind3000/vim-preview'
 
 	" Git 支持
 	Plug 'tpope/vim-fugitive'
 
 	" 使用 ALT+E 来选择窗口
 	nmap <m-e> <Plug>(choosewin)
-
-	" 默认不显示 startify
-	let g:startify_disable_at_vimenter = 0
-	let g:startify_session_dir = '~/.nvim/session'
 
 	" 使用 <space>ha 清除 errormarker 标注的错误
 	noremap <silent><space>ha :RemoveErrorMarkers<cr>
@@ -141,34 +135,69 @@ endif
 
 if index(g:bundle_group, 'basic') >= 0
 
+	" 展示开始画面，显示最近编辑过的文件
+  Plug 'mhinz/vim-startify'
+
+	" 默认不显示 startify
+	let g:startify_disable_at_vimenter = 0
+	let g:startify_session_dir = '~/.nvim/session'
+  
+  let g:startify_update_oldfiles = 1
+  let g:startify_session_autoload = 1
+  let g:startify_session_persistence = 1
+  let g:startify_change_to_dir = 1
+  let g:startify_change_to_vcs_root = 1
+  let g:startify_session_sort = 1
+  let g:startify_relative_path = 1
+  let g:startify_padding_left = 2
+
+  let g:startify_lists = [
+          \ { 'type': 'sessions',  'header': ['   Sessions']       },
+          \ { 'type': 'files',     'header': ['   MRU']            },
+          \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+          \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+          \ { 'type': 'commands',  'header': ['   Commands']       },
+          \ ]
+  hi StartifyBracket ctermfg=240
+  hi StartifyFile    ctermfg=147
+  hi StartifyFooter  ctermfg=240
+  hi StartifyHeader  ctermfg=114
+  hi StartifyNumber  ctermfg=215
+  hi StartifyPath    ctermfg=245
+  hi StartifySlash   ctermfg=240
+  hi StartifySpecial ctermfg=240
+endif
+
+if index(g:bundle_group, 'basic') >= 0
+
 	" 一次性安装一大堆 colorscheme
 	" Plug 'flazz/vim-colorschemes'
 	Plug 'morhetz/gruvbox'
-	Plug 'itchyny/landscape.vim'
-	Plug 'kaicataldo/material.vim'
-	Plug 'rakr/vim-one'
-	Plug 'NLKNguyen/papercolor-theme'
-	Plug 'sonph/onehalf', { 'rtp': 'vim' }
-
-	let g:PaperColor_Theme_Options = {
-		\   'theme': { 
-		\     'default': { 
-		\       'allow_bold': 1,
-		\		'allow_italic' : 1
-		\     } 
-		\   },	
-		\'language' : {
-			\'python':{
-			\   'highlight_builtins' : 1
-			\},
-			\'cpp':{
-			\	'highlight_standard_library': 1
-			\},
-			\'c':{
-			\	'highlight_builtins' : 1
-			\}
-		\}
-	\}
+	" Plug 'itchyny/landscape.vim'
+	" Plug 'kaicataldo/material.vim'
+	" Plug 'rakr/vim-one'
+	" Plug 'NLKNguyen/papercolor-theme'
+	" Plug 'sonph/onehalf', { 'rtp': 'vim' }
+  "
+	" let g:PaperColor_Theme_Options = {
+	"   \   'theme': {
+	"   \     'default': {
+	"   \       'allow_bold': 1,
+	"   \		'allow_italic' : 1
+	"   \     }
+	"   \   },
+	"   \'language' : {
+	"     \'python':{
+	"     \   'highlight_builtins' : 1
+	"     \},
+	"     \'cpp':{
+	"     \	'highlight_standard_library': 1
+	"     \},
+	"     \'c':{
+	"     \	'highlight_builtins' : 1
+	"     \}
+	"   \}
+	" \}
 endif
 
 "----------------------------------------------------------------------
@@ -669,9 +698,11 @@ if index(g:bundle_group, 'wei-self') >= 0
 	"ALT + -: paste register 0 to terminal.
 	"ALT + q: switch to terminal normal mode.
 	Plug 'skywind3000/vim-terminal-help'
+  let g:terminal_pos = 'rightbelow'
+  let g:terminal_cwd = 2
+  let g:terminal_height = 16
 	let g:terminal_shell = 'bash'
-	"Plug 'yegappan/mru'
-	"Plug 'liuchengxu/vim-which-key'
+  " :terminal bash 新tab页启动终端  
 
 	" 括号显示
 	Plug 'luochen1990/rainbow'
@@ -707,16 +738,6 @@ if index(g:bundle_group, 'wei-self') >= 0
 	let g:ccls_size = 30
 	let g:ccls_position = 'botright'
 	let g:ccls_orientation = 'horizontal'
-
-  " clang-format tool
-  " Plug 'kana/vim-operator-user'
-  " Plug 'rhysd/vim-clang-format'
-  " autocmd FileType c,cpp,objc vnoremap <buffer><Leader>cf :ClangFormat<CR>
-  " let g:clang_format#style_options = "LLVM"
-  " " let g:clang_format#style_options = {
-  " "           \ "AccessModifierOffset" : -2,
-  " "           \ "AlignAfterOpenBracket" : "align",
-  " "           \ }
 
   Plug 'sbdchd/neoformat'
   let g:neoformat_cpp_clangformat = {
@@ -881,7 +902,7 @@ if index(g:bundle_group,'coc') >= 0
 
 	" Mappings for CoCList
 	" Show all diagnostics.
-	nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
+	nnoremap <silent><nowait> <space>d  :<C-u>CocList diagnostics<cr>
 	" Manage extensions.
 	nnoremap <silent><nowait> <space>m  :<C-u>CocList marketplace<cr>
 	" Show commands.
@@ -893,7 +914,7 @@ if index(g:bundle_group,'coc') >= 0
 	" Search workspace symbols.
 	nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
 	" Search files
-	nnoremap <silent><nowait> <space>f  :<C-u>CocList files<cr>
+	nnoremap <silent><nowait> <space>f  :<C-u>CocList gfiles<cr>
 	" Do default action for next item.
 	nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 	" Do default action for previous item.
@@ -912,10 +933,35 @@ if index(g:bundle_group, 'coc-lsp') >= 0
 	let g:coc_global_extensions+= ['coc-go','coc-rls']
 endif
 
+" $(VIM_FILEPATH)    # 当前 buffer 的文件名全路径
+" $(VIM_FILENAME)    # 当前 buffer 的文件名（没有前面的路径）
+" $(VIM_FILEDIR)     # 当前 buffer 的文件所在路径
+" $(VIM_FILEEXT)     # 当前 buffer 的扩展名
+" $(VIM_FILENOEXT)   # 当前 buffer 的主文件名（没有前面路径和后面扩展名）
+" $(VIM_PATHNOEXT)   # 带路径的主文件名（$VIM_FILEPATH 去掉扩展名）
+" $(VIM_CWD)         # 当前 Vim 目录（:pwd 命令返回的）
+" $(VIM_RELDIR)      # 相对于当前路径的文件名
+" $(VIM_RELNAME)     # 相对于当前路径的文件路径
+" $(VIM_ROOT)        # 当前 buffer 的项目根目录
+" $(VIM_CWORD)       # 光标下的单词
+" $(VIM_CFILE)       # 光标下的文件名
+" $(VIM_CLINE)       # 光标停留在当前文件的多少行（行号）
+" $(VIM_GUI)         # 是否在 GUI 下面运行？
+" $(VIM_VERSION)     # Vim 版本号
+" $(VIM_COLUMNS)     # 当前屏幕宽度
+" $(VIM_LINES)       # 当前屏幕高度
+" $(VIM_SVRNAME)     # v:servername 的值
+" $(VIM_DIRNAME)     # 当前文件夹目录名，比如 vim 在 ~/github/prj1/src，那就是 src
+" $(VIM_PRONAME)     # 当前项目目录名，比如项目根目录在 ~/github/prj1，那就是 prj1
+" $(VIM_INIFILE)     # 当前任务的 ini 文件名
+" $(VIM_INIHOME)     # 当前任务的 ini 文件的目录（方便调用一些和配置文件位置相关的脚本）
+" :AsyncTaskMacro
 if index(g:bundle_group, 'async') >= 0
 	Plug 'skywind3000/asynctasks.vim'
 	Plug 'skywind3000/asyncrun.vim'
 	let g:asyncrun_open = 6
+  let g:asynctasks_term_pos = 'tab'
+  let g:asynctasks_term_reuse = 1
 endif
 
 "----------------------------------------------------------------------
