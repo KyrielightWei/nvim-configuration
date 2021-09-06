@@ -41,6 +41,10 @@ set ttimeoutlen=50
 " 显示光标位置
 set ruler
 
+" 高亮当前行列
+set cursorline
+set cursorcolumn
+
 
 "----------------------------------------------------------------------
 " 搜索设置

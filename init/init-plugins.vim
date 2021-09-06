@@ -787,7 +787,9 @@ if index(g:bundle_group,'coc') >= 0
 	let g:coc_global_extensions = ['coc-lists','coc-json','coc-marketplace','coc-vimlsp','coc-cmake','coc-snippets','coc-tag']
 	let g:coc_global_extensions += ['coc-highlight','coc-git']
 
-	autocmd CursorHold * silent call CocActionAsync('highlight')
+  set updatetime=300
+  autocmd CursorHold * silent call CocActionAsync('highlight')
+  autocmd CursorHoldI * silent call CocActionAsync('showSignatureHelp')
 
 	" Use tab for trigger completion with characters ahead and navigate.
 	" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -821,8 +823,8 @@ if index(g:bundle_group,'coc') >= 0
 
 	" Use `[g` and `]g` to navigate diagnostics
 	" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-	nmap <silent> [g <Plug>(coc-diagnostic-prev)
-	nmap <silent> ]g <Plug>(coc-diagnostic-next)
+	" nmap <silent> [g <Plug>(coc-diagnostic-prev)
+	" nmap <silent> ]g <Plug>(coc-diagnostic-next)
 
 	" GoTo code navigation.
 	nmap <silent> gd <Plug>(coc-definition)
@@ -830,6 +832,39 @@ if index(g:bundle_group,'coc') >= 0
 	nmap <silent> gc <Plug>(coc-declaration) 
 	nmap <silent> gi <Plug>(coc-implementation)
 	nmap <silent> gr <Plug>(coc-references-used)
+
+    " bases
+  nn <silent> xb :call CocLocations('ccls','$ccls/inheritance')<cr>
+  " bases of up to 3 levels
+  nn <silent> xB :call CocLocations('ccls','$ccls/inheritance',{'levels':3})<cr>
+  " derived
+  nn <silent> xd :call CocLocations('ccls','$ccls/inheritance',{'derived':v:true})<cr>
+  " derived of up to 3 levels
+  nn <silent> xD :call CocLocations('ccls','$ccls/inheritance',{'derived':v:true,'levels':3})<cr>
+  
+  " caller
+  nn <silent> xc :call CocLocations('ccls','$ccls/call')<cr>
+  " callee
+  nn <silent> xC :call CocLocations('ccls','$ccls/call',{'callee':v:true})<cr>
+  
+  " $ccls/member
+  " member variables / variables in a namespace
+  nn <silent> xm :call CocLocations('ccls','$ccls/member')<cr>
+  " member functions / functions in a namespace
+  nn <silent> xf :call CocLocations('ccls','$ccls/member',{'kind':3})<cr>
+  " nested classes / types in a namespace
+  nn <silent> xs :call CocLocations('ccls','$ccls/member',{'kind':2})<cr>
+  
+  nn <silent> xv :call CocLocations('ccls','$ccls/vars')<cr>
+  nn <silent> xV :call CocLocations('ccls','$ccls/vars',{'kind':1})<cr>
+  
+  nn xx x
+  
+  nn <silent><buffer> <leader><l> :call CocLocations('ccls','$ccls/navigate',{'direction':'D'})<cr>
+  nn <silent><buffer> <leader><k> :call CocLocations('ccls','$ccls/navigate',{'direction':'L'})<cr>
+  nn <silent><buffer> <leader><j> :call CocLocations('ccls','$ccls/navigate',{'direction':'R'})<cr>
+  nn <silent><buffer> <leader><h> :call CocLocations('ccls','$ccls/navigate',{'direction':'U'})<cr>
+
 
 	" Use K to show documentation in preview window.
 	nnoremap <silent> K :call <SID>show_documentation()<CR>
@@ -841,9 +876,6 @@ if index(g:bundle_group,'coc') >= 0
 	    call CocAction('doHover')
 	  endif
 	endfunction
-
-	" Highlight the symbol and its references when holding the cursor.
-	autocmd CursorHold * silent call CocActionAsync('highlight')
 
 	" Symbol renaming.
 	nmap <leader>rn <Plug>(coc-rename)
@@ -902,7 +934,7 @@ if index(g:bundle_group,'coc') >= 0
 
 	" Mappings for CoCList
 	" Show all diagnostics.
-	nnoremap <silent><nowait> <space>d  :<C-u>CocList diagnostics<cr>
+	" nnoremap <silent><nowait> <space>d  :<C-u>CocList diagnostics<cr>
 	" Manage extensions.
 	nnoremap <silent><nowait> <space>m  :<C-u>CocList marketplace<cr>
 	" Show commands.
@@ -913,7 +945,7 @@ if index(g:bundle_group,'coc') >= 0
 	nnoremap <silent><nowait> <space>l :<C-u>CocList location<cr>
 	" Search workspace symbols.
 	nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
-	" Search files
+	" Search git files
 	nnoremap <silent><nowait> <space>f  :<C-u>CocList gfiles<cr>
 	" Do default action for next item.
 	nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
