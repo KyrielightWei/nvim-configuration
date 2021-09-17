@@ -699,7 +699,7 @@ if index(g:bundle_group, 'wei-self') >= 0
 	"ALT + q: switch to terminal normal mode.
 	Plug 'skywind3000/vim-terminal-help'
   let g:terminal_pos = 'rightbelow'
-  let g:terminal_cwd = 2
+  let g:terminal_cwd = 1 
   let g:terminal_height = 16
 	let g:terminal_shell = 'bash'
   " :terminal bash 新tab页启动终端  
@@ -833,33 +833,33 @@ if index(g:bundle_group,'coc') >= 0
 	nmap <silent> gi <Plug>(coc-implementation)
 	nmap <silent> gr <Plug>(coc-references-used)
 
-    " bases
+  " "   " bases
   nn <silent> xb :call CocLocations('ccls','$ccls/inheritance')<cr>
-  " bases of up to 3 levels
+  " " " bases of up to 3 levels
   nn <silent> xB :call CocLocations('ccls','$ccls/inheritance',{'levels':3})<cr>
-  " derived
+  " " " derived
   nn <silent> xd :call CocLocations('ccls','$ccls/inheritance',{'derived':v:true})<cr>
-  " derived of up to 3 levels
+  " " " derived of up to 3 levels
   nn <silent> xD :call CocLocations('ccls','$ccls/inheritance',{'derived':v:true,'levels':3})<cr>
-  
-  " caller
+
+  " " " caller
   nn <silent> xc :call CocLocations('ccls','$ccls/call')<cr>
-  " callee
+  " " " callee
   nn <silent> xC :call CocLocations('ccls','$ccls/call',{'callee':v:true})<cr>
-  
-  " $ccls/member
-  " member variables / variables in a namespace
+
+  " " " $ccls/member
+  " " " member variables / variables in a namespace
   nn <silent> xm :call CocLocations('ccls','$ccls/member')<cr>
-  " member functions / functions in a namespace
+  " " " member functions / functions in a namespace
   nn <silent> xf :call CocLocations('ccls','$ccls/member',{'kind':3})<cr>
-  " nested classes / types in a namespace
+  " " " nested classes / types in a namespace
   nn <silent> xs :call CocLocations('ccls','$ccls/member',{'kind':2})<cr>
-  
+
   nn <silent> xv :call CocLocations('ccls','$ccls/vars')<cr>
   nn <silent> xV :call CocLocations('ccls','$ccls/vars',{'kind':1})<cr>
-  
+
   nn xx x
-  
+
   nn <silent><buffer> <leader><l> :call CocLocations('ccls','$ccls/navigate',{'direction':'D'})<cr>
   nn <silent><buffer> <leader><k> :call CocLocations('ccls','$ccls/navigate',{'direction':'L'})<cr>
   nn <silent><buffer> <leader><j> :call CocLocations('ccls','$ccls/navigate',{'direction':'R'})<cr>
