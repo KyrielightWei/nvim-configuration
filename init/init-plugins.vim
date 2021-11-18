@@ -14,8 +14,8 @@
 " 默认情况下的分组，可以再前面覆盖之
 "----------------------------------------------------------------------
 if !exists('g:bundle_group')
-	let g:bundle_group = ['basic', 'colorscheme' , 'tags', 'enhanced', 'filetypes', 'textobj']
-	let g:bundle_group += ['tags', 'lightline' , 'ale', 'echodoc']
+	let g:bundle_group = ['basic', 'colorscheme' , 'enhanced', 'filetypes', 'textobj']
+	let g:bundle_group += ['lightline' , 'ale']
 	let g:bundle_group += ['leaderf','comments','wei-self','coc','coc-explore','coc-lsp','async']
 endif
 "'nerdtree'
@@ -214,11 +214,11 @@ if index(g:bundle_group, 'enhanced') >= 0
 	" 给不同语言提供字典补全，插入模式下 c-x c-k 触发
 	Plug 'asins/vim-dict'
 
-	" 使用 :FlyGrep 命令进行实时 grep
-	Plug 'wsdjeg/FlyGrep.vim'
-
-	" 使用 :CtrlSF 命令进行模仿 sublime 的 grep
-	Plug 'dyng/ctrlsf.vim'
+	" " 使用 :FlyGrep 命令进行实时 grep
+	" Plug 'wsdjeg/FlyGrep.vim'
+  "
+	" " 使用 :CtrlSF 命令进行模仿 sublime 的 grep
+	" Plug 'dyng/ctrlsf.vim'
 
 	" 配对括号和引号自动补全
 	Plug 'Raimondi/delimitMate'
@@ -340,7 +340,7 @@ if index(g:bundle_group, 'filetypes') >= 0
 	Plug 'plasticboy/vim-markdown'
 	Plug 'elzr/vim-json'
 	Plug 'pangloss/vim-javascript'
-	Plug 'fatih/vim-go'
+  Plug 'fatih/vim-go'
 
 	" powershell 脚本文件的语法高亮
 	Plug 'pprovost/vim-ps1', { 'for': 'ps1' }
@@ -400,11 +400,14 @@ if index(g:bundle_group, 'lightline') >= 0
 		endfunction
 
 	 let g:lightline = {
-	  \ 'colorscheme': 'gruvbox',
+	  \ 'colorscheme': 'one',
+    \ 'enable' : {'statusline':1 , 'tabline':1},
+    \ 'separator' : { 'left': '', 'right': '' },
+    \ 'subseparator' : { 'left': '|', 'right': '|' },
 	  \ 'active': {
 	  \   'left': [ [ 'mode', 'paste' ],
-	  \             [ 'readonly', 'filename', 'modified'],
-	  \				['bufstate','gitbranch','cocstatus','gitblame']],
+	  \             [ 'readonly', 'filename'],[ 'modified'],['bufstate'],
+	  \				['gitbranch'],['cocstatus']],
 	  \   'right': [ ['lineinfo' ],
 	  \              [ 'percent' ],
 	  \              [ 'fileformat', 'fileencoding', 'filetype'],
