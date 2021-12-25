@@ -7,44 +7,52 @@
 		".hg",
 		".projections.json"
 	],
-  "languageserver": {
+	"diagnostic.enable": true,
+	"diagnostic.displayByAle": false,
+      "diagnostic.messageTarget": "float",
+      "diagnostic.virtualText": false,
+      "diagnostic.showUnused": true,
+      "diagnostic.enableSign": true,
+      "diagnostic.autoRefresh": true,
+      "diagnostic.checkCurrentLine": true,
+		  "coc.source.around.firstMatch": false,
+			"coc.source.buffer.firstMatch": false,
+			"hover.target": "float",
+"languageserver": {
       "ccls": {
-            "enable": true,
             "command": "ccls",
             "filetypes": ["c", "cpp", "ipp", "cuda","ic","objc", "objcpp"],
             "rootPatterns": ["compile_commands.json", ".ccls",".git",".svn"],
             "initializationOptions": {
                     "cache": {
 											"directory":".tmp/ccls_cache/",
-                      "retainInMemory": 1,
-                      "format":"json",
-                      "hierarchicalPath":false
+                               "retainInMemory": 1,
+															 "format":"json",
+															 "hierarchicalPath":false
                             },
                     "clang":{
-                      "pathMappings":[]
-                    },
-                    "index": {
+													"pathMappings":[]
+										},
+                    "index":{
+                      "trackDependency":1,
                               "threads": 0
                             },
                     "completion": {
                               "caseSensitivity": 2,
-                              "detailedLabel":true
+                              "detailedLabel":true,
+                              "filterAndSort":true
                             },
                     "highlight": {
                               "lsRanges" : true
                             },
-						        "client" : {
-						        					"snippetSupport":true
-						        				}
+						"client" : {
+											"snippetSupport":true
+										}
                   }
           }
     },
-	  "  diagnostic.enableSign": false,
-		  "coc.source.around.firstMatch": false,
-			"coc.source.buffer.firstMatch": false,
-			"coc.preferences.hoverTarget": "float",
-  "clangd.enabled":false,
-  "clangd.arguments": [ "--all-scopes-completion","--completion-style=detailed","--function-arg-placeholders","--header-insertion=iwyu","--pch-storage=disk","--background-index","--cross-file-rename","-j=32" ],
+  "clangd.enabled": false,
+  "clangd.arguments": [ "--all-scopes-completion","--completion-style=detailed","--function-arg-placeholders","--header-insertion=iwyu","--pch-storage=disk","--background-index","--cross-file-rename","-j=8" ],
   "clangd.showDBChangedNotification": true,
 	"clangd.semanticHighlighting": true,
 	"coc.preferences.colorSupport": true,
@@ -52,8 +60,6 @@
 	"coc.preferences.currentFunctionSymbolAutoUpdate": true,
 	"coc.source.file.ignoreHidden": false,
   "coc.preferences.formatOnType": true,
-	"diagnostic.enable": true,
-	"diagnostic.displayByAle": true,
 	"suggest.completionItemKindLabels": {
 			"keyword": "\uf1de",
 			"variable": "\ue79b",
