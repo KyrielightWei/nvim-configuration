@@ -173,6 +173,8 @@ if index(g:bundle_group, 'basic') >= 0
 	" 一次性安装一大堆 colorscheme
 	" Plug 'flazz/vim-colorschemes'
 	Plug 'morhetz/gruvbox'
+  Plug 'sainnhe/gruvbox-material'
+  Plug 'ayu-theme/ayu-vim' 
 	" Plug 'itchyny/landscape.vim'
 	" Plug 'kaicataldo/material.vim'
 	" Plug 'rakr/vim-one'
@@ -400,7 +402,7 @@ if index(g:bundle_group, 'lightline') >= 0
 		endfunction
 
 	 let g:lightline = {
-	  \ 'colorscheme': 'one',
+	  \ 'colorscheme': 'gruvbox_material',
     \ 'enable' : {'statusline':1 , 'tabline':1},
     \ 'separator' : { 'left': '', 'right': '' },
     \ 'subseparator' : { 'left': '|', 'right': '|' },
