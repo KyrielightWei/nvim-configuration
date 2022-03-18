@@ -15,8 +15,9 @@
 "----------------------------------------------------------------------
 if !exists('g:bundle_group')
 	let g:bundle_group = ['basic', 'colorscheme' , 'enhanced', 'filetypes', 'textobj']
-	let g:bundle_group += ['lightline' , 'ale']
-	let g:bundle_group += ['leaderf','comments','wei-self','coc','coc-explore','coc-lsp','async']
+	" let g:bundle_group += ['lightline' , 'ale','leaderf']
+	let g:bundle_group += ['comments','wei-self','lua']
+  " 'coc','coc-explore','coc-lsp','async']
 endif
 "'nerdtree'
 
@@ -45,7 +46,7 @@ call plug#begin(get(g:, 'bundle_home', '~/.config/nvim-plugins'))
 Plug 'easymotion/vim-easymotion'
 
 " 文件浏览器，代替 netrw
-Plug 'justinmk/vim-dirvish'
+" Plug 'justinmk/vim-dirvish'
 
 " 表格对齐，使用命令 Tabularize
 Plug 'godlygeek/tabular', { 'on': 'Tabularize' }
@@ -97,11 +98,11 @@ if index(g:bundle_group, 'basic') >= 0
 	Plug 'kshenoy/vim-signature'
 
 	" 用于在侧边符号栏显示 git/svn 的 diff
-	Plug 'mhinz/vim-signify'
+	" Plug 'mhinz/vim-signify'
 
 	" 根据 quickfix 中匹配到的错误信息，高亮对应文件的错误行
 	" 使用 :RemoveErrorMarkers 命令或者 <space>ha 清除错误
-	Plug 'mh21/errormarker.vim'
+	" Plug 'mh21/errormarker.vim'
 
 	" 使用 ALT+e 会在不同窗口/标签上显示 A/B/C 等编号，然后字母直接跳转
 	Plug 't9md/vim-choosewin'
@@ -208,10 +209,10 @@ endif
 if index(g:bundle_group, 'enhanced') >= 0
 
 	" 用 v 选中一个区域后，ALT_+/- 按分隔符扩大/缩小选区
-	Plug 'terryma/vim-expand-region'
+	" Plug 'terryma/vim-expand-region'
 
 	" 快速文件搜索
-	Plug 'junegunn/fzf'
+	" Plug 'junegunn/fzf'
 
 	" 给不同语言提供字典补全，插入模式下 c-x c-k 触发
 	Plug 'asins/vim-dict'
@@ -223,14 +224,14 @@ if index(g:bundle_group, 'enhanced') >= 0
 	" Plug 'dyng/ctrlsf.vim'
 
 	" 配对括号和引号自动补全
-	Plug 'Raimondi/delimitMate'
+	" Plug 'Raimondi/delimitMate'
 
 	" 提供 gist 接口
-	Plug 'lambdalisue/vim-gista', { 'on': 'Gista' }
+	" Plug 'lambdalisue/vim-gista', { 'on': 'Gista' }
 
 	" ALT_+/- 用于按分隔符扩大缩小 v 选区
-	map <m-=> <Plug>(expand_region_expand)
-	map <m--> <Plug>(expand_region_shrink)
+	" map <m-=> <Plug>(expand_region_expand)
+	" map <m--> <Plug>(expand_region_shrink)
 endif
 
 
@@ -337,33 +338,33 @@ endif
 "----------------------------------------------------------------------
 if index(g:bundle_group, 'filetypes') >= 0
 
-	" syntax highlight
-	Plug 'pboettch/vim-cmake-syntax'
-	Plug 'plasticboy/vim-markdown'
-	Plug 'elzr/vim-json'
-	Plug 'pangloss/vim-javascript'
-  Plug 'fatih/vim-go'
-
-	" powershell 脚本文件的语法高亮
-	Plug 'pprovost/vim-ps1', { 'for': 'ps1' }
-
-	" lua 语法高亮增强
-	Plug 'tbastos/vim-lua', { 'for': 'lua' }
-
-	" C++ 语法高亮增强，支持 11/14/17 标准
-	Plug 'octol/vim-cpp-enhanced-highlight', { 'for': ['c', 'cpp'] }
-	
-	" 额外语法文件
-	Plug 'justinmk/vim-syntax-extra', { 'for': ['c', 'bison', 'flex', 'cpp'] }
-
-	" python 语法文件增强
-	Plug 'vim-python/python-syntax', { 'for': ['python'] }
-
-	" rust 语法增强
-	Plug 'rust-lang/rust.vim', { 'for': 'rust' }
-
-	" vim org-mode
-	Plug 'jceb/vim-orgmode', { 'for': 'org' }
+	" " syntax highlight
+	" Plug 'pboettch/vim-cmake-syntax'
+	" Plug 'plasticboy/vim-markdown'
+	" Plug 'elzr/vim-json'
+	" Plug 'pangloss/vim-javascript'
+  " Plug 'fatih/vim-go'
+  "
+	" " powershell 脚本文件的语法高亮
+	" Plug 'pprovost/vim-ps1', { 'for': 'ps1' }
+  "
+	" " lua 语法高亮增强
+	" Plug 'tbastos/vim-lua', { 'for': 'lua' }
+  "
+	" " C++ 语法高亮增强，支持 11/14/17 标准
+	" Plug 'octol/vim-cpp-enhanced-highlight', { 'for': ['c', 'cpp'] }
+	"
+	" " 额外语法文件
+	" Plug 'justinmk/vim-syntax-extra', { 'for': ['c', 'bison', 'flex', 'cpp'] }
+  "
+	" " python 语法文件增强
+	" Plug 'vim-python/python-syntax', { 'for': ['python'] }
+  "
+	" " rust 语法增强
+	" Plug 'rust-lang/rust.vim', { 'for': 'rust' }
+  "
+	" " vim org-mode
+	" Plug 'jceb/vim-orgmode', { 'for': 'org' }
 endif
 
 
@@ -710,34 +711,34 @@ if index(g:bundle_group, 'wei-self') >= 0
   " :terminal bash 新tab页启动终端  
 
 	" 括号显示
-	Plug 'luochen1990/rainbow'
-	let g:rainbow_active = 1
-	let g:rainbow_conf = {
-	\	'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
-	\	'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
-	\	'operators': '_,_',
-	\	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
-	\	'separately': {
-	\		'*': {},
-	\		'tex': {
-	\			'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
-	\		},
-	\		'lisp': {
-	\			'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
-	\		},
-	\		'vim': {
-	\			'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
-	\		},
-	\		'html': {
-	\			'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
-	\		},
-	\		'css': 0,
-	\	}
-	\}
-
-	" 缩进显示
-	Plug 'Yggdroot/indentLine'
-
+	" Plug 'luochen1990/rainbow'
+	" let g:rainbow_active = 1
+	" let g:rainbow_conf = {
+	" \	'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick'],
+	" \	'ctermfgs': ['lightblue', 'lightyellow', 'lightcyan', 'lightmagenta'],
+	" \	'operators': '_,_',
+	" \	'parentheses': ['start=/(/ end=/)/ fold', 'start=/\[/ end=/\]/ fold', 'start=/{/ end=/}/ fold'],
+	" \	'separately': {
+	" \		'*': {},
+	" \		'tex': {
+	" \			'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/'],
+	" \		},
+	" \		'lisp': {
+	" \			'guifgs': ['royalblue3', 'darkorange3', 'seagreen3', 'firebrick', 'darkorchid3'],
+	" \		},
+	" \		'vim': {
+	" \			'parentheses': ['start=/(/ end=/)/', 'start=/\[/ end=/\]/', 'start=/{/ end=/}/ fold', 'start=/(/ end=/)/ containedin=vimFuncBody', 'start=/\[/ end=/\]/ containedin=vimFuncBody', 'start=/{/ end=/}/ fold containedin=vimFuncBody'],
+	" \		},
+	" \		'html': {
+	" \			'parentheses': ['start=/\v\<((area|base|br|col|embed|hr|img|input|keygen|link|menuitem|meta|param|source|track|wbr)[ >])@!\z([-_:a-zA-Z0-9]+)(\s+[-_:a-zA-Z0-9]+(\=("[^"]*"|'."'".'[^'."'".']*'."'".'|[^ '."'".'"><=`]*))?)*\>/ end=#</\z1># fold'],
+	" \		},
+	" \		'css': 0,
+	" \	}
+	" \}
+  "
+	" " 缩进显示
+	" Plug 'Yggdroot/indentLine'
+  "
 	" ccls callHierarchy
 	Plug 'm-pilia/vim-ccls'
 	let g:ccls_size = 30
@@ -1001,93 +1002,468 @@ if index(g:bundle_group, 'async') >= 0
   let g:asynctasks_term_reuse = 1
 endif
 
+if index(g:bundle_group, 'lua') >= 0
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'hrsh7th/cmp-buffer'
+  Plug 'hrsh7th/cmp-path'
+  Plug 'hrsh7th/cmp-cmdline'
+  Plug 'hrsh7th/nvim-cmp'
+  
+  " For vsnip users.
+  Plug 'hrsh7th/cmp-vsnip'
+  Plug 'hrsh7th/vim-vsnip'
+
+  Plug 'nvim-lua/plenary.nvim'
+  Plug 'nvim-telescope/telescope.nvim'
+  Plug 'nvim-telescope/telescope-fzf-native.nvim', { 'do': 'make' }
+
+  Plug 'kyazdani42/nvim-web-devicons' " for file icons
+  Plug 'kyazdani42/nvim-tree.lua'
+  let g:nvim_tree_indent_markers = 1 "0 by default, this option shows indent markers when folders are open
+  let g:nvim_tree_git_hl = 1 "0 by default, will enable file highlight for git attributes (can be used without the icons).
+  let g:nvim_tree_highlight_opened_files = 1 "0 by default, will enable folder and file icon highlight for opened files/directories.
+  let g:nvim_tree_root_folder_modifier = ':~' "This is the default. See :help filename-modifiers for more options
+  let g:nvim_tree_add_trailing = 1 "0 by default, append a trailing slash to folder names
+  let g:nvim_tree_group_empty = 1 " 0 by default, compact folders that only contain a single folder into one node in the file tree
+  let g:nvim_tree_icon_padding = ' ' "one space by default, used for rendering the space between the icon and the filename. Use with caution, it could break rendering if you set an empty string depending on your font.
+  let g:nvim_tree_symlink_arrow = ' >> ' " defaults to ' ➛ '. used as a separator between symlinks' source and target.
+  let g:nvim_tree_respect_buf_cwd = 1 "0 by default, will change cwd of nvim-tree to that of new buffer's when opening nvim-tree.
+  let g:nvim_tree_create_in_closed_folder = 1 "0 by default, When creating files, sets the path of a file when cursor is on a closed folder to the parent folder when 0, and inside the folder when 1.
+  let g:nvim_tree_special_files = { 'README.md': 1, 'Makefile': 1, 'MAKEFILE': 1 } " List of filenames that gets highlighted with NvimTreeSpecialFile
+  let g:nvim_tree_show_icons = {
+      \ 'git': 1,
+      \ 'folders': 0,
+      \ 'files': 0,
+      \ 'folder_arrows': 0,
+      \ }
+  "If 0, do not show the icons for one of 'git' 'folder' and 'files'
+  "1 by default, notice that if 'files' is 1, it will only display
+  "if nvim-web-devicons is installed and on your runtimepath.
+  "if folder is 1, you can also tell folder_arrows 1 to show small arrows next to the folder icons.
+  "but this will not work when you set indent_markers (because of UI conflict)
+  
+  " default will show icon by default if no icon is provided
+  " default shows no icon by default
+  let g:nvim_tree_icons = {
+      \ 'default': '',
+      \ 'symlink': '',
+      \ 'git': {
+      \   'unstaged': "✗",
+      \   'staged': "✓",
+      \   'unmerged': "",
+      \   'renamed': "➜",
+      \   'untracked': "★",
+      \   'deleted': "",
+      \   'ignored': "◌"
+      \   },
+      \ 'folder': {
+      \   'arrow_open': "",
+      \   'arrow_closed': "",
+      \   'default': "",
+      \   'open': "",
+      \   'empty': "",
+      \   'empty_open': "",
+      \   'symlink': "",
+      \   'symlink_open': "",
+      \   }
+      \ }
+  
+  nnoremap <C-n> :NvimTreeToggle<CR>
+  nnoremap <leader>r :NvimTreeRefresh<CR>
+  nnoremap <leader>n :NvimTreeFindFile<CR>
+  " More available functions:
+  " NvimTreeOpen
+  " NvimTreeClose
+  " NvimTreeFocus
+  " NvimTreeFindFileToggle
+  " NvimTreeResize
+  " NvimTreeCollapse
+  " NvimTreeCollapseKeepBuffers
+  " a list of groups can be found at `:help nvim_tree_highlight`
+  highlight NvimTreeFolderIcon guibg=blue
+
+  Plug 'nvim-lualine/lualine.nvim'
+  Plug 'arkav/lualine-lsp-progress'
+
+  Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+  Plug 'GustavoKatel/telescope-asynctasks.nvim'
+
+  Plug 'nvim-telescope/telescope-file-browser.nvim'
+
+  Plug 'lewis6991/spellsitter.nvim'
+  Plug 'lewis6991/gitsigns.nvim'
+  Plug 'p00f/nvim-ts-rainbow'
+endif
+
 "----------------------------------------------------------------------
 " 结束插件安装
 "----------------------------------------------------------------------
 call plug#end()
 
 
-
 "----------------------------------------------------------------------
-" YouCompleteMe 默认设置：YCM 需要你另外手动编译安装
+" Lua config
 "----------------------------------------------------------------------
 
-" 禁用预览功能：扰乱视听
-let g:ycm_add_preview_to_completeopt = 0
+if index(g:bundle_group, 'lua') >= 0
 
-" 禁用诊断功能：我们用前面更好用的 ALE 代替
-let g:ycm_show_diagnostics_ui = 0
-let g:ycm_server_log_level = 'info'
-let g:ycm_min_num_identifier_candidate_chars = 2
-let g:ycm_collect_identifiers_from_comments_and_strings = 1
-let g:ycm_complete_in_strings=1
-let g:ycm_key_invoke_completion = '<c-z>'
 set completeopt=menu,menuone,noselect
 
-" noremap <c-z> <NOP>
+lua <<EOF
+  -- Setup nvim-cmp.
+  local cmp = require'cmp'
 
-" 两个字符自动触发语义补全
-let g:ycm_semantic_triggers =  {
-			\ 'c,cpp,python,java,go,erlang,perl': ['re!\w{2}'],
-			\ 'cs,lua,javascript': ['re!\w{2}'],
-			\ }
+  cmp.setup({
+    snippet = {
+      -- REQUIRED - you must specify a snippet engine
+      expand = function(args)
+        vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+        -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+        -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
+        -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+      end,
+    },
+    mapping = {
+      ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
+      ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
+      ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
+     ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+      ['<C-e>'] = cmp.mapping({
+        i = cmp.mapping.abort(),
+        c = cmp.mapping.close(),
+      }),
+      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    },
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp' },
+      { name = 'vsnip' }, -- For vsnip users.
+      -- { name = 'luasnip' }, -- For luasnip users.
+      -- { name = 'ultisnips' }, -- For ultisnips users.
+      -- { name = 'snippy' }, -- For snippy users.
+    }, {
+      { name = 'buffer' },
+    })
+  })
 
+  -- Set configuration for specific filetype.
+  cmp.setup.filetype('gitcommit', {
+    sources = cmp.config.sources({
+      { name = 'cmp_git' }, -- You can specify the `cmp_git` source if you were installed it. 
+    }, {
+      { name = 'buffer' },
+    })
+  })
 
-"----------------------------------------------------------------------
-" Ycm 白名单（非名单内文件不启用 YCM），避免打开个 1MB 的 txt 分析半天
-"----------------------------------------------------------------------
-let g:ycm_filetype_whitelist = {
-			\ "c":1,
-			\ "cpp":1,
-			\ "objc":1,
-			\ "objcpp":1,
-			\ "python":1,
-			\ "java":1,
-			\ "javascript":1,
-			\ "coffee":1,
-			\ "vim":1,
-			\ "go":1,
-			\ "cs":1,
-			\ "lua":1,
-			\ "perl":1,
-			\ "perl6":1,
-			\ "php":1,
-			\ "ruby":1,
-			\ "rust":1,
-			\ "erlang":1,
-			\ "asm":1,
-			\ "nasm":1,
-			\ "masm":1,
-			\ "tasm":1,
-			\ "asm68k":1,
-			\ "asmh8300":1,
-			\ "asciidoc":1,
-			\ "basic":1,
-			\ "vb":1,
-			\ "make":1,
-			\ "cmake":1,
-			\ "html":1,
-			\ "css":1,
-			\ "less":1,
-			\ "json":1,
-			\ "cson":1,
-			\ "typedscript":1,
-			\ "haskell":1,
-			\ "lhaskell":1,
-			\ "lisp":1,
-			\ "scheme":1,
-			\ "sdl":1,
-			\ "sh":1,
-			\ "zsh":1,
-			\ "bash":1,
-			\ "man":1,
-			\ "markdown":1,
-			\ "matlab":1,
-			\ "maxima":1,
-			\ "dosini":1,
-			\ "conf":1,
-			\ "config":1,
-			\ "zimbu":1,
-			\ "ps1":1,
-			\ }
+  -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline('/', {
+    sources = {
+      { name = 'buffer' }
+    }
+  })
 
+  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline(':', {
+    sources = cmp.config.sources({
+      { name = 'path' }
+    }, {
+      { name = 'cmdline' }
+    })
+  })
+
+  -- Mappings.
+  -- See `:help vim.diagnostic.*` for documentation on any of the below functions
+  local opts = { noremap=true, silent=true }
+  -- vim.api.nvim_set_keymap('n', '<space>d', '<cmd>lua vim.diagnostic.open_float()<CR>', opts)
+  vim.api.nvim_set_keymap('n', '[d', '<cmd>lua vim.diagnostic.goto_prev()<CR>', opts)
+  vim.api.nvim_set_keymap('n', ']d', '<cmd>lua vim.diagnostic.goto_next()<CR>', opts)
+  vim.api.nvim_set_keymap('n', '<leader>d', '<cmd>lua vim.diagnostic.setloclist()<CR>', opts)
+  
+  -- Use an on_attach function to only map the following keys
+  -- after the language server attaches to the current buffer
+  local on_attach = function(client, bufnr)
+    -- Enable completion triggered by <c-x><c-o>
+    vim.api.nvim_buf_set_option(bufnr, 'omnifunc', 'v:lua.vim.lsp.omnifunc')
+  
+    -- Mappings.
+    -- See `:help vim.lsp.*` for documentation on any of the below functions
+    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gD', '<cmd>lua vim.lsp.buf.declaration()<CR>', opts)
+    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
+    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
+    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
+    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
+    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
+    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
+    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>D', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
+    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>rn', '<cmd>lua vim.lsp.buf.rename()<CR>', opts)
+    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>ca', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
+    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+    -- vim.api.nvim_buf_set_keymap(bufnr, 'n', '<space>f', '<cmd>lua vim.lsp.buf.formatting()<CR>', opts)
+  end
+
+  -- Setup lspconfig.
+  local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
+  local util = require 'lspconfig.util'
+  -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
+  require('lspconfig').ccls.setup {
+    on_attach = on_attach;
+    cmd ={"ccls"};
+    filetypes = {"c", "cpp", "ipp", "cuda","ic","objc", "objcpp"};
+    root_dir = util.root_pattern("compile_commands.json", ".ccls",".git",".svn");
+    init_options = {
+      cache= {
+											directory=".tmp/ccls_cache/";
+                               retainInMemory= 1;
+															 format ="json";
+															 hierarchicalPath = false
+                               };
+                             clang={
+                    pathMappings={}
+										};
+                    index = {
+                      trackDependency = 1;
+                              threads = 0
+                              };
+                    completion = {
+                              caseSensitivity= 2;
+                              detailedLabel=true;
+                              filterAndSort=true
+                            };
+                    highlight = {
+                              lsRanges= true
+                            };
+						client = {
+											snippetSupport=true
+										};
+                  }
+  }
+
+  -- Setup nvim-tree
+  require'nvim-tree'.setup {
+    -- 关闭文件时自动关闭
+    auto_close = true,
+    -- 不显示 git 状态图标
+    git = {
+        enable = true
+    }
+  }
+
+  require'nvim-web-devicons'.setup {
+    -- your personnal icons can go here (to override)
+    -- you can specify color or cterm_color instead of specifying both of them
+    -- DevIcon will be appended to `name`
+    -- override = {
+    --  zsh = {
+    --    icon = "",
+    --    color = "#428850",
+    --    cterm_color = "65",
+    --    name = "Zsh"
+    --  }
+    -- };
+    -- globally enable default icons (default to false)
+    -- will get overriden by `get_icons` option
+    default = true;
+  }   
+
+  require('telescope').setup{
+    --local opts = {noremap = true, slient = true}
+    defaults = {
+      -- Default configuration for telescope goes here:
+      -- config_key = value,
+      -- path_display = "smart";
+            -- Format path as "file.txt (path\to\file\)"
+            path_display = function(opts, path)
+              -- local tail = require("telescope.utils").path_tail(path)
+              local smart = require("telescope.utils").path_smart(path)
+              return string.format("%s", smart)
+            end,
+      mappings = {
+        i = {
+          -- map actions.which_key to <C-h> (default: <C-/>)
+          -- actions.which_key shows the mappings for your picker,
+          -- e.g. git_{create, delete, ...}_branch for the git_branches picker
+          -- ["<C-h>"] = "which_key"
+        },
+        n = {
+          -- ["gd"] = require('telescope.builtin'.lsp_definitions{}
+        }
+      }
+    },
+    pickers = {
+      -- Default configuration for builtin pickers goes here:
+      -- picker_name = {
+      --   picker_config_key = value,
+      --   ...
+      -- }
+      -- Now the picker_config_key will be applied every time you call this
+      -- builtin picker
+    },
+    extensions = {
+      -- Your extension configuration goes here:
+      -- extension_name = {
+      --   extension_config_key = value,
+      -- }
+      -- please take a look at the readme of the extension you want to configure
+      fzf = {
+      fuzzy = true,                    -- false will only do exact matching
+      override_generic_sorter = true,  -- override the generic sorter
+      override_file_sorter = true,     -- override the file sorter
+      case_mode = "smart_case",        -- or "ignore_case" or "respect_case"
+                                       -- the default case_mode is "smart_case"
+      },
+      file_browser = {
+        theme = "ivy",
+        mappings = {
+          ["i"] = {
+            -- your custom insert mode mappings
+          },
+          ["n"] = {
+            -- your custom normal mode mappings
+          },
+        },
+      },
+    }
+  }
+  require('telescope').load_extension('fzf')
+  require("telescope").load_extension "file_browser"
+
+  require('lualine').setup {
+    options = {
+      icons_enabled = false,
+      theme = 'horizon',
+      component_separators = { left = '', right = ''},
+      section_separators = { left = '', right = ''},
+      disabled_filetypes = {},
+      always_divide_middle = true,
+    },
+    sections = {
+      lualine_a = {'mode'},
+      lualine_b = {'branch', 'diff', 'diagnostics'},
+      lualine_c = {'filename', 'lsp_progress'},
+      lualine_x = {'encoding', 'fileformat', 'filetype'},
+      lualine_y = {'progress'},
+      lualine_z = {'location'}
+    },
+    inactive_sections = {
+      lualine_a = {},
+      lualine_b = {},
+      lualine_c = {'filename'},
+      lualine_x = {'location'},
+      lualine_y = {},
+      lualine_z = {}
+    },
+    tabline = {},
+    extensions = {}
+  }
+
+  require'nvim-treesitter.configs'.setup {
+    -- One of "all", "maintained" (parsers with maintainers), or a list of languages
+    -- ensure_installed = "maintained",
+    ensure_installed = {"c","cpp","bash"},
+
+    -- Install languages synchronously (only applied to `ensure_installed`)
+    sync_install = false,
+
+    -- List of parsers to ignore installing
+    ignore_install = { "" },
+
+    highlight = {
+      -- `false` will disable the whole extension
+      enable = true,
+
+      -- list of language that will be disabled
+      disable = {},
+
+      -- Setting this to true will run `:h syntax` and tree-sitter at the same time.
+      -- Set this to `true` if you depend on 'syntax' being enabled (like for indentation).
+      -- Using this option may slow down your editor, and you may see some duplicate highights.
+      -- Instead of true it can also be a list of languages
+      additional_vim_regex_highlighting = false,
+    },
+    incremental_selection = {
+      enable = true,
+      keymaps = {
+        -- init_selection = "gnn",
+        -- node_incremental = "grn",
+        -- scope_incremental = "grc",
+        -- node_decremental = "grm",
+      }
+    },
+    indent = {
+      enable = true
+    },
+    rainbow = {
+      enable = true,
+      -- disable = { "jsx", "cpp" }, list of languages you want to disable the plugin for
+      extended_mode = true, -- Also highlight non-bracket delimiters like html tags, boolean or table: lang -> boolean
+      max_file_lines = nil, -- Do not enable for files with more than n lines, int
+      -- colors = {}, -- table of hex strings
+      -- termcolors = {} -- table of colour name strings
+    }
+  }
+
+  require('spellsitter').setup {
+    -- Whether enabled, can be a list of filetypes, e.g. {'python', 'lua'}
+    enable = true,
+    }
+
+  require('gitsigns').setup {
+    signs = {
+      add          = {hl = 'GitSignsAdd'   , text = '│', numhl='GitSignsAddNr'   , linehl='GitSignsAddLn'},
+      change       = {hl = 'GitSignsChange', text = '│', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+      delete       = {hl = 'GitSignsDelete', text = '_', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+      topdelete    = {hl = 'GitSignsDelete', text = '‾', numhl='GitSignsDeleteNr', linehl='GitSignsDeleteLn'},
+      changedelete = {hl = 'GitSignsChange', text = '~', numhl='GitSignsChangeNr', linehl='GitSignsChangeLn'},
+    },
+    signcolumn = true,  -- Toggle with `:Gitsigns toggle_signs`
+    numhl      = true, -- Toggle with `:Gitsigns toggle_numhl`
+    linehl     = false, -- Toggle with `:Gitsigns toggle_linehl`
+    word_diff  = false, -- Toggle with `:Gitsigns toggle_word_diff`
+    watch_gitdir = {
+      interval = 1000,
+      follow_files = true
+    },
+    attach_to_untracked = true,
+    current_line_blame = true, -- Toggle with `:Gitsigns toggle_current_line_blame`
+    current_line_blame_opts = {
+      virt_text = true,
+      virt_text_pos = 'eol', -- 'eol' | 'overlay' | 'right_align'
+      delay = 1000,
+      ignore_whitespace = false,
+    },
+    current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
+    sign_priority = 6,
+    update_debounce = 100,
+    status_formatter = nil, -- Use default
+    max_file_length = 40000,
+    preview_config = {
+      -- Options passed to nvim_open_win
+      border = 'single',
+      style = 'minimal',
+      relative = 'cursor',
+      row = 0,
+      col = 1
+    },
+    yadm = {
+      enable = false
+    },
+  }
+EOF
+
+nnoremap gd <cmd>lua require'telescope.builtin'.lsp_definitions{}<CR>
+nnoremap gr <cmd>lua require'telescope.builtin'.lsp_references{}<CR>
+nnoremap gD <cmd>lua require'telescope.builtin'.lsp_declaration{}<CR>
+nnoremap K <cmd>lua require'telescope.builtin'.lsp_hover{}<CR>
+nnoremap gi <cmd>lua require'telescope.builtin'.lsp_implementations{}<CR>
+nnoremap gy <cmd>lua require'telescope.builtin'.lsp_type_definitions{}<CR>
+nnoremap <space>d <cmd>lua require'telescope.builtin'.diagnostics{}<CR>
+nnoremap <space>o <cmd>lua require'telescope.builtin'.lsp_document_symbols{}<CR>
+nnoremap <space>s <cmd>lua require'telescope.builtin'.lsp_workspace_symbols{}<CR>
+nnoremap <space>f <cmd>lua require'telescope.builtin'.find_files{}<CR>
+nnoremap <space>b <cmd>lua require'telescope.builtin'.current_buffer_fuzzy_find{}<CR>
+nnoremap <space>h <cmd>lua require'telescope.builtin'.oldfiles{}<CR>
+nnoremap <space>t <cmd>lua require('telescope').extensions.asynctasks.all()<CR>
+nnoremap <space>t <cmd>lua require "telescope".extensions.file_browser.file_browser<CR>
+
+endif
