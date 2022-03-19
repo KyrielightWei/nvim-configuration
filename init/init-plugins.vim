@@ -16,7 +16,7 @@
 if !exists('g:bundle_group')
 	let g:bundle_group = ['basic', 'colorscheme' , 'enhanced', 'filetypes', 'textobj']
 	" let g:bundle_group += ['lightline' , 'ale','leaderf']
-	let g:bundle_group += ['comments','wei-self','lua']
+	let g:bundle_group += ['comments','async','wei-self','lua']
   " 'coc','coc-explore','coc-lsp','async']
 endif
 "'nerdtree'
@@ -136,37 +136,37 @@ endif
 
 if index(g:bundle_group, 'basic') >= 0
 
-	" 展示开始画面，显示最近编辑过的文件
-  Plug 'mhinz/vim-startify'
-
-	" 默认不显示 startify
-	let g:startify_disable_at_vimenter = 0
-	let g:startify_session_dir = '~/.nvim/session'
-  
-  let g:startify_update_oldfiles = 1
-  let g:startify_session_autoload = 1
-  let g:startify_session_persistence = 1
-  let g:startify_change_to_dir = 1
-  let g:startify_change_to_vcs_root = 1
-  let g:startify_session_sort = 1
-  let g:startify_relative_path = 1
-  let g:startify_padding_left = 2
-
-  let g:startify_lists = [
-          \ { 'type': 'sessions',  'header': ['   Sessions']       },
-          \ { 'type': 'files',     'header': ['   MRU']            },
-          \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
-          \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
-          \ { 'type': 'commands',  'header': ['   Commands']       },
-          \ ]
-  hi StartifyBracket ctermfg=240
-  hi StartifyFile    ctermfg=147
-  hi StartifyFooter  ctermfg=240
-  hi StartifyHeader  ctermfg=114
-  hi StartifyNumber  ctermfg=215
-  hi StartifyPath    ctermfg=245
-  hi StartifySlash   ctermfg=240
-  hi StartifySpecial ctermfg=240
+	" " 展示开始画面，显示最近编辑过的文件
+  " Plug 'mhinz/vim-startify'
+  "
+	" " 默认不显示 startify
+	" let g:startify_disable_at_vimenter = 1
+	" let g:startify_session_dir = '~/.nvim/session'
+  "
+  " let g:startify_update_oldfiles = 1
+  " let g:startify_session_autoload = 1
+  " let g:startify_session_persistence = 1
+  " let g:startify_change_to_dir = 1
+  " let g:startify_change_to_vcs_root = 1
+  " let g:startify_session_sort = 1
+  " let g:startify_relative_path = 1
+  " let g:startify_padding_left = 2
+  "
+  " let g:startify_lists = [
+  "         \ { 'type': 'sessions',  'header': ['   Sessions']       },
+  "         \ { 'type': 'files',     'header': ['   MRU']            },
+  "         \ { 'type': 'dir',       'header': ['   MRU '. getcwd()] },
+  "         \ { 'type': 'bookmarks', 'header': ['   Bookmarks']      },
+  "         \ { 'type': 'commands',  'header': ['   Commands']       },
+  "         \ ]
+  " hi StartifyBracket ctermfg=240
+  " hi StartifyFile    ctermfg=147
+  " hi StartifyFooter  ctermfg=240
+  " hi StartifyHeader  ctermfg=114
+  " hi StartifyNumber  ctermfg=215
+  " hi StartifyPath    ctermfg=245
+  " hi StartifySlash   ctermfg=240
+  " hi StartifySpecial ctermfg=240
 endif
 
 if index(g:bundle_group, 'basic') >= 0
@@ -1094,6 +1094,33 @@ if index(g:bundle_group, 'lua') >= 0
   Plug 'lewis6991/spellsitter.nvim'
   Plug 'lewis6991/gitsigns.nvim'
   Plug 'p00f/nvim-ts-rainbow'
+
+  Plug 'lukas-reineke/indent-blankline.nvim'
+
+  Plug 'glepnir/dashboard-nvim'
+  let g:dashboard_default_executive = 'telescope'
+  let g:dashboard_custom_header = [
+        \'',
+    \'',
+    \'        ⢀⣴⡾⠃⠄⠄⠄⠄⠄⠈⠺⠟⠛⠛⠛⠛⠻⢿⣿⣿⣿⣿⣶⣤⡀  ',
+    \'      ⢀⣴⣿⡿⠁⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⣸⣿⣿⣿⣿⣿⣿⣿⣷ ',
+    \'     ⣴⣿⡿⡟⡼⢹⣷⢲⡶⣖⣾⣶⢄⠄⠄⠄⠄⠄⢀⣼⣿⢿⣿⣿⣿⣿⣿⣿⣿ ',
+    \'    ⣾⣿⡟⣾⡸⢠⡿⢳⡿⠍⣼⣿⢏⣿⣷⢄⡀⠄⢠⣾⢻⣿⣸⣿⣿⣿⣿⣿⣿⣿ ',
+    \'  ⣡⣿⣿⡟⡼⡁⠁⣰⠂⡾⠉⢨⣿⠃⣿⡿⠍⣾⣟⢤⣿⢇⣿⢇⣿⣿⢿⣿⣿⣿⣿⣿ ',
+    \' ⣱⣿⣿⡟⡐⣰⣧⡷⣿⣴⣧⣤⣼⣯⢸⡿⠁⣰⠟⢀⣼⠏⣲⠏⢸⣿⡟⣿⣿⣿⣿⣿⣿ ',
+    \' ⣿⣿⡟⠁⠄⠟⣁⠄⢡⣿⣿⣿⣿⣿⣿⣦⣼⢟⢀⡼⠃⡹⠃⡀⢸⡿⢸⣿⣿⣿⣿⣿⡟ ',
+    \' ⣿⣿⠃⠄⢀⣾⠋⠓⢰⣿⣿⣿⣿⣿⣿⠿⣿⣿⣾⣅⢔⣕⡇⡇⡼⢁⣿⣿⣿⣿⣿⣿⢣ ',
+    \' ⣿⡟⠄⠄⣾⣇⠷⣢⣿⣿⣿⣿⣿⣿⣿⣭⣀⡈⠙⢿⣿⣿⡇⡧⢁⣾⣿⣿⣿⣿⣿⢏⣾ ',
+    \' ⣿⡇⠄⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⢻⠇⠄⠄⢿⣿⡇⢡⣾⣿⣿⣿⣿⣿⣏⣼⣿ ',
+    \' ⣿⣷⢰⣿⣿⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⢰⣧⣀⡄⢀⠘⡿⣰⣿⣿⣿⣿⣿⣿⠟⣼⣿⣿ ',
+    \' ⢹⣿⢸⣿⣿⠟⠻⢿⣿⣿⣿⣿⣿⣿⣿⣶⣭⣉⣤⣿⢈⣼⣿⣿⣿⣿⣿⣿⠏⣾⣹⣿⣿ ',
+    \' ⢸⠇⡜⣿⡟⠄⠄⠄⠈⠙⣿⣿⣿⣿⣿⣿⣿⣿⠟⣱⣻⣿⣿⣿⣿⣿⠟⠁⢳⠃⣿⣿⣿ ',
+    \'  ⣰⡗⠹⣿⣄⠄⠄⠄⢀⣿⣿⣿⣿⣿⣿⠟⣅⣥⣿⣿⣿⣿⠿⠋  ⣾⡌⢠⣿⡿⠃ ',
+    \' ⠜⠋⢠⣷⢻⣿⣿⣶⣾⣿⣿⣿⣿⠿⣛⣥⣾⣿⠿⠟⠛⠉            ',
+    \'',
+    \'',
+    \]
+
 endif
 
 "----------------------------------------------------------------------
@@ -1223,7 +1250,7 @@ lua <<EOF
 										};
                     index = {
                       trackDependency = 1;
-                              threads = 0
+                              threads = 4
                               };
                     completion = {
                               caseSensitivity= 2;
@@ -1263,7 +1290,7 @@ lua <<EOF
     -- };
     -- globally enable default icons (default to false)
     -- will get overriden by `get_icons` option
-    default = true;
+    default = false;
   }   
 
   require('telescope').setup{
@@ -1272,6 +1299,7 @@ lua <<EOF
       -- Default configuration for telescope goes here:
       -- config_key = value,
       -- path_display = "smart";
+            color_devicons = false,
             -- Format path as "file.txt (path\to\file\)"
             path_display = function(opts, path)
               -- local tail = require("telescope.utils").path_tail(path)
@@ -1314,6 +1342,9 @@ lua <<EOF
       },
       file_browser = {
         theme = "ivy",
+        -- picker = {
+        --   cwd_to_path = true,
+        -- },
         mappings = {
           ["i"] = {
             -- your custom insert mode mappings
@@ -1327,6 +1358,9 @@ lua <<EOF
   }
   require('telescope').load_extension('fzf')
   require("telescope").load_extension "file_browser"
+  -- require("telescope").extensions.file_browser.picker_.file_browser{
+  --  cwd_to_path = true; 
+  -- }
 
   require('lualine').setup {
     options = {
@@ -1449,6 +1483,18 @@ lua <<EOF
       enable = false
     },
   }
+
+  vim.opt.listchars:append("eol:↴")
+  
+  require("indent_blankline").setup {
+    enabled = false,
+    use_treesitter = true,
+    show_current_context = true,
+    show_current_context_start = true,
+    char_list = {'|', '¦', '┆', '┊'}
+
+  }
+
 EOF
 
 nnoremap gd <cmd>lua require'telescope.builtin'.lsp_definitions{}<CR>
@@ -1460,10 +1506,11 @@ nnoremap gy <cmd>lua require'telescope.builtin'.lsp_type_definitions{}<CR>
 nnoremap <space>d <cmd>lua require'telescope.builtin'.diagnostics{}<CR>
 nnoremap <space>o <cmd>lua require'telescope.builtin'.lsp_document_symbols{}<CR>
 nnoremap <space>s <cmd>lua require'telescope.builtin'.lsp_workspace_symbols{}<CR>
-nnoremap <space>f <cmd>lua require'telescope.builtin'.find_files{}<CR>
+nnoremap <space>f <cmd>lua require'telescope.builtin'.find_files({cwd=vim.call("asyncrun#get_root","%")})<CR>
+nnoremap <space>g <cmd>lua require'telescope.builtin'.git_files{}<CR>
 nnoremap <space>b <cmd>lua require'telescope.builtin'.current_buffer_fuzzy_find{}<CR>
 nnoremap <space>h <cmd>lua require'telescope.builtin'.oldfiles{}<CR>
 nnoremap <space>t <cmd>lua require('telescope').extensions.asynctasks.all()<CR>
-nnoremap <space>t <cmd>lua require "telescope".extensions.file_browser.file_browser<CR>
+nnoremap <space>e <cmd>lua require "telescope".extensions.file_browser.file_browser({cwd_to_path=true,path=vim.call("expand","%:p:h")})<CR>
 
 endif
