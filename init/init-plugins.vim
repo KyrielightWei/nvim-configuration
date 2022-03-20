@@ -1099,6 +1099,7 @@ if index(g:bundle_group, 'lua') >= 0
 
   Plug 'glepnir/dashboard-nvim'
   let g:dashboard_default_executive = 'telescope'
+  let g:dashboard_session_directory = '~/.cache/nvim/session'
   let g:dashboard_custom_header = [
         \'',
     \'',
