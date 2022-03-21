@@ -224,7 +224,7 @@ if index(g:bundle_group, 'enhanced') >= 0
 	" Plug 'dyng/ctrlsf.vim'
 
 	" 配对括号和引号自动补全
-	" Plug 'Raimondi/delimitMate'
+	Plug 'Raimondi/delimitMate'
 
 	" 提供 gist 接口
 	" Plug 'lambdalisue/vim-gista', { 'on': 'Gista' }
@@ -1073,7 +1073,7 @@ if index(g:bundle_group, 'lua') >= 0
   
   nnoremap <C-n> :NvimTreeToggle<CR>
   nnoremap <leader>r :NvimTreeRefresh<CR>
-  nnoremap <leader>n :NvimTreeFindFile<CR>
+  " nnoremap <leader>n :NvimTreeFindFile<CR>
   " More available functions:
   " NvimTreeOpen
   " NvimTreeClose
@@ -1083,7 +1083,7 @@ if index(g:bundle_group, 'lua') >= 0
   " NvimTreeCollapse
   " NvimTreeCollapseKeepBuffers
   " a list of groups can be found at `:help nvim_tree_highlight`
-  highlight NvimTreeFolderIcon guibg=blue
+  " highlight NvimTreeFolderIcon guibg=blue
 
   Plug 'nvim-lualine/lualine.nvim'
   Plug 'arkav/lualine-lsp-progress'
@@ -1286,6 +1286,52 @@ lua <<EOF
     -- 不显示 git 状态图标
     git = {
         enable = true
+    },
+    view = {
+      mappings = 
+    {
+      custom_only = true,
+      list = {
+         { key = {"<CR>", "o", "<2-LeftMouse>"}, action = "edit" },
+         { key = "<leader>e",                        action = "edit_in_place" },
+         { key = {"O"},                          action = "edit_no_picker" },
+         { key = {"<2-RightMouse>", "<C-]>"},    action = "cd" },
+         { key = "<leader>v",                        action = "vsplit" },
+         { key = "<leader>x",                        action = "split" },
+         { key = "<leader>t",                        action = "tabnew" },
+         { key = "<",                            action = "prev_sibling" },
+         { key = ">",                            action = "next_sibling" },
+         { key = "P",                            action = "parent_node" },
+         { key = "<BS>",                         action = "close_node" },
+         { key = "<Tab>",                        action = "preview" },
+         { key = "K",                            action = "first_sibling" },
+         { key = "J",                            action = "last_sibling" },
+         { key = "I",                            action = "toggle_git_ignored" },
+         { key = "H",                            action = "toggle_dotfiles" },
+         { key = "R",                            action = "refresh" },
+         { key = "a",                            action = "create" },
+         { key = "d",                            action = "remove" },
+         { key = "D",                            action = "trash" },
+         { key = "r",                            action = "rename" },
+         { key = "<leader>r",                        action = "full_rename" },
+         { key = "x",                            action = "cut" },
+         { key = "c",                            action = "copy" },
+         { key = "p",                            action = "paste" },
+         { key = "y",                            action = "copy_name" },
+         { key = "Y",                            action = "copy_path" },
+         { key = "gy",                           action = "copy_absolute_path" },
+         { key = "[c",                           action = "prev_git_item" },
+         { key = "]c",                           action = "next_git_item" },
+         { key = "-",                            action = "dir_up" },
+         { key = "s",                            action = "system_open" },
+         { key = "q",                            action = "close" },
+         { key = "g?",                           action = "toggle_help" },
+         { key = "W",                            action = "collapse_all" },
+         { key = "S",                            action = "search_node" },
+         { key = "<leader>k",                        action = "toggle_file_info" },
+         { key = ".",                            action = "run_file_command" },
+      }
+    }
     }
   }
 
@@ -1306,6 +1352,7 @@ lua <<EOF
     default = false;
   }   
 
+  local actions = require('telescope.actions')
   require('telescope').setup{
     --local opts = {noremap = true, slient = true}
     defaults = {
@@ -1320,15 +1367,54 @@ lua <<EOF
               return string.format("%s", smart)
             end,
       mappings = {
-        i = {
-          -- map actions.which_key to <C-h> (default: <C-/>)
-          -- actions.which_key shows the mappings for your picker,
-          -- e.g. git_{create, delete, ...}_branch for the git_branches picker
-          -- ["<C-h>"] = "which_key"
+         i = {
+          ["<C-n>"] = actions.move_selection_next,
+          ["<C-p>"] = actions.move_selection_previous,
+          ["<C-c>"] = actions.close,
+          ["<Down>"] = actions.move_selection_next,
+          ["<Up>"] = actions.move_selection_previous,
+          ["<CR>"] = actions.select_default,
+          ["<leader>x"] = actions.select_horizontal,
+          ["<leader>v"] = actions.select_vertical,
+          ["<leader>t"] = actions.select_tab,
+          ["<C-u>"] = actions.preview_scrolling_up,
+          ["<C-d>"] = actions.preview_scrolling_down,
+          ["<PageUp>"] = actions.results_scrolling_up,
+          ["<PageDown>"] = actions.results_scrolling_down,
+          ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
+          ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
+          ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
+          ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+          ["<C-l>"] = actions.complete_tag,
+          ["<C-_>"] = actions.which_key, -- keys from pressing <C-/>
+          ["<C-w>"] = { "<c-s-w>", type = "command" },
         },
+
         n = {
-          -- ["gd"] = require('telescope.builtin'.lsp_definitions{}
-        }
+          ["<esc>"] = actions.close,
+          ["<CR>"] = actions.select_default,
+          ["<leader>x"] = actions.select_horizontal,
+          ["<leader>v"] = actions.select_vertical,
+          ["<leader>t"] = actions.select_tab,
+          ["<Tab>"] = actions.toggle_selection + actions.move_selection_worse,
+          ["<S-Tab>"] = actions.toggle_selection + actions.move_selection_better,
+          ["<C-q>"] = actions.send_to_qflist + actions.open_qflist,
+          ["<M-q>"] = actions.send_selected_to_qflist + actions.open_qflist,
+          ["j"] = actions.move_selection_next,
+          ["k"] = actions.move_selection_previous,
+          ["H"] = actions.move_to_top,
+          ["M"] = actions.move_to_middle,
+          ["L"] = actions.move_to_bottom,
+          ["<Down>"] = actions.move_selection_next,
+          ["<Up>"] = actions.move_selection_previous,
+          ["gg"] = actions.move_to_top,
+          ["G"] = actions.move_to_bottom,
+          ["<C-u>"] = actions.preview_scrolling_up,
+          ["<C-d>"] = actions.preview_scrolling_down,
+          ["<PageUp>"] = actions.results_scrolling_up,
+          ["<PageDown>"] = actions.results_scrolling_down,
+          ["?"] = actions.which_key,
+        },
       }
     },
     pickers = {
@@ -1498,7 +1584,7 @@ lua <<EOF
     },
   }
 
-  vim.opt.listchars:append("eol:↴")
+  -- vim.opt.listchars:append("eol:↴")
   
   require("indent_blankline").setup {
     enabled = false,
