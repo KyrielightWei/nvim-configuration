@@ -13,7 +13,7 @@
       end,
     },
     formatting = {
-      format = lspkind.cmp_format(),
+      format = lspkind.cmp_format({
       mode = "symbol_text",
       menu = ({
         nvim_lsp = "[LSP]",
@@ -28,6 +28,7 @@
         cmdline = "[Cmdline]",
         latex_symbols = "[Latex]",
       })
+    })
     },
     mapping = {
       ['<C-b>'] = cmp.mapping(cmp.mapping.scroll_docs(-4), { 'i', 'c' }),
