@@ -671,24 +671,26 @@ if index(g:bundle_group, 'leaderf') >= 0
 endif
 
 if index(g:bundle_group, 'comments') >= 0
-	Plug 'preservim/nerdcommenter'
+	" Plug 'preservim/nerdcommenter'
+  "
+	" " Add spaces after comment delimiters by default
+	" let g:NERDSpaceDelims = 1
+	" " Use compact syntax for prettified multi-line comments
+	" let g:NERDCompactSexyComs = 1
+	" " Align line-wise comment delimiters flush left instead of following code indentation
+	" let g:NERDDefaultAlign = 'left'
+	" " Set a language to use its alternate delimiters by default
+	" let g:NERDAltDelims_java = 1
+	" " Add your own custom formats or override the defaults
+	" let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
+	" " Allow commenting and inverting empty lines (useful when commenting a region)
+	" let g:NERDCommentEmptyLines = 1
+	" " Enable trimming of trailing whitespace when uncommenting
+	" let g:NERDTrimTrailingWhitespace = 1
+	" " Enable NERDCommenterToggle to check all selected lines is commented or not
+	" let g:NERDToggleCheckAllLines = 1
 
-	" Add spaces after comment delimiters by default
-	let g:NERDSpaceDelims = 1
-	" Use compact syntax for prettified multi-line comments
-	let g:NERDCompactSexyComs = 1
-	" Align line-wise comment delimiters flush left instead of following code indentation
-	let g:NERDDefaultAlign = 'left'
-	" Set a language to use its alternate delimiters by default
-	let g:NERDAltDelims_java = 1
-	" Add your own custom formats or override the defaults
-	let g:NERDCustomDelimiters = { 'c': { 'left': '/**','right': '*/' } }
-	" Allow commenting and inverting empty lines (useful when commenting a region)
-	let g:NERDCommentEmptyLines = 1
-	" Enable trimming of trailing whitespace when uncommenting
-	let g:NERDTrimTrailingWhitespace = 1
-	" Enable NERDCommenterToggle to check all selected lines is commented or not 
-	let g:NERDToggleCheckAllLines = 1
+  Plug 'numToStr/Comment.nvim'
 endif
 
 if index(g:bundle_group, 'wei-self') >= 0
@@ -1122,6 +1124,8 @@ if index(g:bundle_group, 'lua') >= 0
     \'',
     \]
 
+    Plug 'haringsrob/nvim_context_vt'
+    Plug 'SmiteshP/nvim-gps'
 endif
 
 "----------------------------------------------------------------------
@@ -1271,6 +1275,9 @@ lua <<EOF
   require'nvim-tree'.setup {
     -- 关闭文件时自动关闭
     auto_close = true,
+    open_on_tab = false,
+    open_on_setup = false,
+    disable_netrw = true,
     -- 不显示 git 状态图标
     git = {
         enable = true
@@ -1363,6 +1370,7 @@ lua <<EOF
   --  cwd_to_path = true; 
   -- }
 
+  local gps = require("nvim-gps")
   require('lualine').setup {
     options = {
       icons_enabled = false,
@@ -1375,7 +1383,7 @@ lua <<EOF
     sections = {
       lualine_a = {'mode'},
       lualine_b = {'branch', 'diff', 'diagnostics'},
-      lualine_c = {'filename', 'lsp_progress'},
+      lualine_c = {'filename', { gps.get_location, cond = gps.is_available },'lsp_progress'},
       lualine_x = {'encoding', 'fileformat', 'filetype'},
       lualine_y = {'progress'},
       lualine_z = {'location'}
@@ -1496,6 +1504,124 @@ lua <<EOF
 
   }
 
+  require('Comment').setup()
+
+  require('nvim_context_vt').setup({
+  -- Enable by default. You can disable and use :NvimContextVtToggle to maually enable.
+  -- Default: true
+  enabled = true,
+
+  -- Override default virtual text prefix
+  -- Default: '-->'
+  prefix = '',
+
+  -- Override the internal highlight group name
+  -- Default: 'ContextVt'
+  highlight = 'CustomContextVt',
+
+  -- Disable virtual text for given filetypes
+  -- Default: { 'markdown' }
+  disable_ft = { 'markdown' },
+
+  -- Disable display of virtual text below blocks for indentation based languages like Python
+  -- Default: false
+  disable_virtual_lines = false,
+
+  -- Same as above but only for spesific filetypes
+  -- Default: {}
+  disable_virtual_lines_ft = { 'yaml' },
+
+  -- How many lines required after starting position to show virtual text
+  -- Default: 1 (equals two lines total)
+  min_rows = 1,
+
+  -- Same as above but only for spesific filetypes
+  -- Default: {}
+  min_rows_ft = {},
+
+  -- Custom virtual text node parser callback
+  -- Default: nil
+  custom_parser = function(node, ft, opts)
+    local ts_utils = require('nvim-treesitter.ts_utils')
+
+    -- If you return `nil`, no virtual text will be displayed.
+    if node:type() == 'function' then
+      return nil
+    end
+
+    -- This is the standard text
+    return '--> ' .. ts_utils.get_node_text(node)[1]
+  end,
+
+  -- Custom node validator callback
+  -- Default: nil
+  custom_validator = function(node, ft, opts)
+    -- Internally a node is matched against min_rows and configured targets
+    local default_validator = require('nvim_context_vt.utils').default_validator
+    if default_validator(node, ft) then
+      -- Custom behaviour after using the internal validator
+      if node:type() == 'function' then
+        return false
+      end
+    end
+
+    return true
+  end,
+
+  -- Custom node virtual text resolver callback
+  -- Default: nil
+  custom_resolver = function(nodes, ft, opts)
+    -- By default the last node is used
+    return nodes[#nodes]
+  end,
+  })
+
+
+  require("nvim-gps").setup({
+
+	disable_icons = true,           -- Setting it to true will disable all icons
+
+	icons = {
+		["class-name"] = ' ',      -- Classes and class-like objects
+		["function-name"] = ' ',   -- Functions
+		["method-name"] = ' ',     -- Methods (functions inside class-like objects)
+		["container-name"] = '⛶ ',  -- Containers (example: lua tables)
+		["tag-name"] = '炙'         -- Tags (example: html tags)
+	},
+
+	-- Add custom configuration per language or
+	-- Disable the plugin for a language
+	-- Any language not disabled here is enabled by default
+	languages = {
+
+		-- Disable for particular languages
+		-- ["bash"] = false, -- disables nvim-gps for bash
+		-- ["go"] = false,   -- disables nvim-gps for golang
+
+		-- Override default setting for particular languages
+		-- ["ruby"] = {
+		--	separator = '|', -- Overrides default separator with '|'
+		--	icons = {
+		--		-- Default icons not specified in the lang config
+		--		-- will fallback to the default value
+		--		-- "container-name" will fallback to default because it's not set
+		--		["function-name"] = '',    -- to ensure empty values, set an empty string
+		--		["tag-name"] = ''
+		--		["class-name"] = '::',
+		--		["method-name"] = '#',
+		--	}
+		--}
+	},
+
+	separator = ' > ',
+
+	-- limit for amount of context shown
+	-- 0 means no limit
+	depth = 0,
+
+	-- indicator used when context hits depth limit
+	depth_limit_indicator = ".."
+})  
 EOF
 
 nnoremap gd <cmd>lua require'telescope.builtin'.lsp_definitions{}<CR>
