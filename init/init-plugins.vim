@@ -784,6 +784,7 @@ if index(g:bundle_group, 'wei-self') >= 0
     \ 'stdin' : 1,
     \ 'stderr' : 1,
   \}
+  " let g:neoformat_verbose = 1 " only affects the verbosity of Neoformat
   let g:neoformat_enabled_cpp = ['clangformat']
   let g:neoformat_enabled_c = ['clangformat']
 endif
@@ -1012,7 +1013,7 @@ if index(g:bundle_group, 'lua') >= 0
   Plug 'hrsh7th/cmp-buffer'
   Plug 'hrsh7th/cmp-path'
   Plug 'hrsh7th/cmp-cmdline'
-  Plug 'lukas-reineke/cmp-rg'
+  " Plug 'lukas-reineke/cmp-rg'
   Plug 'hrsh7th/cmp-nvim-lsp-signature-help'
   Plug 'ray-x/cmp-treesitter'
   Plug 'hrsh7th/cmp-nvim-lsp-document-symbol'
@@ -1133,6 +1134,7 @@ if index(g:bundle_group, 'lua') >= 0
 
     Plug 'haringsrob/nvim_context_vt'
     Plug 'SmiteshP/nvim-gps'
+    Plug 'akinsho/bufferline.nvim'
 endif
 
 "----------------------------------------------------------------------

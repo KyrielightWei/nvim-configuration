@@ -58,67 +58,87 @@ cnoremap <c-_> <c-k>
 "----------------------------------------------------------------------
 " <leader>+数字键 切换tab
 "----------------------------------------------------------------------
-noremap <silent><leader>1 1gt<cr>
-noremap <silent><leader>2 2gt<cr>
-noremap <silent><leader>3 3gt<cr>
-noremap <silent><leader>4 4gt<cr>
-noremap <silent><leader>5 5gt<cr>
-noremap <silent><leader>6 6gt<cr>
-noremap <silent><leader>7 7gt<cr>
-noremap <silent><leader>8 8gt<cr>
-noremap <silent><leader>9 9gt<cr>
-noremap <silent><leader>0 10gt<cr>
+" noremap <silent><leader>1 1gt<cr>
+" noremap <silent><leader>2 2gt<cr>
+" noremap <silent><leader>3 3gt<cr>
+" noremap <silent><leader>4 4gt<cr>
+" noremap <silent><leader>5 5gt<cr>
+" noremap <silent><leader>6 6gt<cr>
+" noremap <silent><leader>7 7gt<cr>
+" noremap <silent><leader>8 8gt<cr>
+" noremap <silent><leader>9 9gt<cr>
+" noremap <silent><leader>0 10gt<cr>
+  nnoremap <silent><leader>1 <Cmd>BufferLineGoToBuffer 1<CR>
+  nnoremap <silent><leader>2 <Cmd>BufferLineGoToBuffer 2<CR>
+  nnoremap <silent><leader>3 <Cmd>BufferLineGoToBuffer 3<CR>
+  nnoremap <silent><leader>4 <Cmd>BufferLineGoToBuffer 4<CR>
+  nnoremap <silent><leader>5 <Cmd>BufferLineGoToBuffer 5<CR>
+  nnoremap <silent><leader>6 <Cmd>BufferLineGoToBuffer 6<CR>
+  nnoremap <silent><leader>7 <Cmd>BufferLineGoToBuffer 7<CR>
+  nnoremap <silent><leader>8 <Cmd>BufferLineGoToBuffer 8<CR>
+  nnoremap <silent><leader>9 <Cmd>BufferLineGoToBuffer 9<CR>
+  nnoremap <silent><leader>0 <Cmd>BufferLineGoToBuffer 10<CR>
 
 
 "----------------------------------------------------------------------
 " ALT+N 切换 tab
 "----------------------------------------------------------------------
-noremap <silent><m-1> :tabn 1<cr>
-noremap <silent><m-2> :tabn 2<cr>
-noremap <silent><m-3> :tabn 3<cr>
-noremap <silent><m-4> :tabn 4<cr>
-noremap <silent><m-5> :tabn 5<cr>
-noremap <silent><m-6> :tabn 6<cr>
-noremap <silent><m-7> :tabn 7<cr>
-noremap <silent><m-8> :tabn 8<cr>
-noremap <silent><m-9> :tabn 9<cr>
-noremap <silent><m-0> :tabn 10<cr>
-inoremap <silent><m-1> <ESC>:tabn 1<cr>
-inoremap <silent><m-2> <ESC>:tabn 2<cr>
-inoremap <silent><m-3> <ESC>:tabn 3<cr>
-inoremap <silent><m-4> <ESC>:tabn 4<cr>
-inoremap <silent><m-5> <ESC>:tabn 5<cr>
-inoremap <silent><m-6> <ESC>:tabn 6<cr>
-inoremap <silent><m-7> <ESC>:tabn 7<cr>
-inoremap <silent><m-8> <ESC>:tabn 8<cr>
-inoremap <silent><m-9> <ESC>:tabn 9<cr>
-inoremap <silent><m-0> <ESC>:tabn 10<cr>
+" noremap <silent><m-1> :tabn 1<cr>
+" noremap <silent><m-2> :tabn 2<cr>
+" noremap <silent><m-3> :tabn 3<cr>
+" noremap <silent><m-4> :tabn 4<cr>
+" noremap <silent><m-5> :tabn 5<cr>
+" noremap <silent><m-6> :tabn 6<cr>
+" noremap <silent><m-7> :tabn 7<cr>
+" noremap <silent><m-8> :tabn 8<cr>
+" noremap <silent><m-9> :tabn 9<cr>
+" noremap <silent><m-0> :tabn 10<cr>
+" inoremap <silent><m-1> <ESC>:tabn 1<cr>
+" inoremap <silent><m-2> <ESC>:tabn 2<cr>
+" inoremap <silent><m-3> <ESC>:tabn 3<cr>
+" inoremap <silent><m-4> <ESC>:tabn 4<cr>
+" inoremap <silent><m-5> <ESC>:tabn 5<cr>
+" inoremap <silent><m-6> <ESC>:tabn 6<cr>
+" inoremap <silent><m-7> <ESC>:tabn 7<cr>
+" inoremap <silent><m-8> <ESC>:tabn 8<cr>
+" inoremap <silent><m-9> <ESC>:tabn 9<cr>
+" inoremap <silent><m-0> <ESC>:tabn 10<cr>
 
+  nnoremap <silent><m-1> <Cmd>BufferLineGoToBuffer 1<CR>
+  nnoremap <silent><m-2> <Cmd>BufferLineGoToBuffer 2<CR>
+  nnoremap <silent><m-3> <Cmd>BufferLineGoToBuffer 3<CR>
+  nnoremap <silent><m-4> <Cmd>BufferLineGoToBuffer 4<CR>
+  nnoremap <silent><m-5> <Cmd>BufferLineGoToBuffer 5<CR>
+  nnoremap <silent><m-6> <Cmd>BufferLineGoToBuffer 6<CR>
+  nnoremap <silent><m-7> <Cmd>BufferLineGoToBuffer 7<CR>
+  nnoremap <silent><m-8> <Cmd>BufferLineGoToBuffer 8<CR>
+  nnoremap <silent><m-9> <Cmd>BufferLineGoToBuffer 9<CR>
+  nnoremap <silent><m-0> <Cmd>BufferLineGoToBuffer 10<CR>
 
 " MacVim 允许 CMD+数字键快速切换标签
-if has("gui_macvim")
-	set macmeta
-	noremap <silent><d-1> :tabn 1<cr>
-	noremap <silent><d-2> :tabn 2<cr>
-	noremap <silent><d-3> :tabn 3<cr>
-	noremap <silent><d-4> :tabn 4<cr>
-	noremap <silent><d-5> :tabn 5<cr>
-	noremap <silent><d-6> :tabn 6<cr>
-	noremap <silent><d-7> :tabn 7<cr>
-	noremap <silent><d-8> :tabn 8<cr>
-	noremap <silent><d-9> :tabn 9<cr>
-	noremap <silent><d-0> :tabn 10<cr>
-	inoremap <silent><d-1> <ESC>:tabn 1<cr>
-	inoremap <silent><d-2> <ESC>:tabn 2<cr>
-	inoremap <silent><d-3> <ESC>:tabn 3<cr>
-	inoremap <silent><d-4> <ESC>:tabn 4<cr>
-	inoremap <silent><d-5> <ESC>:tabn 5<cr>
-	inoremap <silent><d-6> <ESC>:tabn 6<cr>
-	inoremap <silent><d-7> <ESC>:tabn 7<cr>
-	inoremap <silent><d-8> <ESC>:tabn 8<cr>
-	inoremap <silent><d-9> <ESC>:tabn 9<cr>
-	inoremap <silent><d-0> <ESC>:tabn 10<cr>
-endif
+" if has("gui_macvim")
+" 	set macmeta
+" 	noremap <silent><d-1> :tabn 1<cr>
+" 	noremap <silent><d-2> :tabn 2<cr>
+" 	noremap <silent><d-3> :tabn 3<cr>
+" 	noremap <silent><d-4> :tabn 4<cr>
+" 	noremap <silent><d-5> :tabn 5<cr>
+" 	noremap <silent><d-6> :tabn 6<cr>
+" 	noremap <silent><d-7> :tabn 7<cr>
+" 	noremap <silent><d-8> :tabn 8<cr>
+" 	noremap <silent><d-9> :tabn 9<cr>
+" 	noremap <silent><d-0> :tabn 10<cr>
+" 	inoremap <silent><d-1> <ESC>:tabn 1<cr>
+" 	inoremap <silent><d-2> <ESC>:tabn 2<cr>
+" 	inoremap <silent><d-3> <ESC>:tabn 3<cr>
+" 	inoremap <silent><d-4> <ESC>:tabn 4<cr>
+" 	inoremap <silent><d-5> <ESC>:tabn 5<cr>
+" 	inoremap <silent><d-6> <ESC>:tabn 6<cr>
+" 	inoremap <silent><d-7> <ESC>:tabn 7<cr>
+" 	inoremap <silent><d-8> <ESC>:tabn 8<cr>
+" 	inoremap <silent><d-9> <ESC>:tabn 9<cr>
+" 	inoremap <silent><d-0> <ESC>:tabn 10<cr>
+" endif
 
 
 
@@ -136,32 +156,41 @@ noremap <silent> <leader>bp :bp<cr>
 
 noremap <silent> <leader>tc :tabnew<cr>
 noremap <silent> <leader>tq :tabclose<cr>
-noremap <silent> <leader>tn :tabnext<cr>
-noremap <silent> <leader>tp :tabprev<cr>
-noremap <silent> <leader>to :tabonly<cr>
+" noremap <silent> <leader>tn :tabnext<cr>
+" noremap <silent> <leader>tp :tabprev<cr>
+" noremap <silent> <leader>to :tabonly<cr>
+"
+"
+" " 左移 tab
+" function! Tab_MoveLeft()
+" 	let l:tabnr = tabpagenr() - 2
+" 	if l:tabnr >= 0
+" 		exec 'tabmove '.l:tabnr
+" 	endif
+" endfunc
+"
+" " 右移 tab
+" function! Tab_MoveRight()
+" 	let l:tabnr = tabpagenr() + 1
+" 	if l:tabnr <= tabpagenr('$')
+" 		exec 'tabmove '.l:tabnr
+" 	endif
+" endfunc
+"
+" noremap <silent><leader>tl :call Tab_MoveLeft()<cr>
+" noremap <silent><leader>tr :call Tab_MoveRight()<cr>
+" noremap <silent><m-left> :call Tab_MoveLeft()<cr>
+" noremap <silent><m-right> :call Tab_MoveRight()<cr>
 
+" These commands will navigate through buffers in order
+" regardless of which mode you are using  e.g. if you change
+" the order of buffers :bnext and :bprevious will not respect the custom ordering
+nnoremap <silent> <leader>tn :BufferLineCycleNext<CR>
+nnoremap <silent> <leader>tp :BufferLineCyclePrev<CR>
 
-" 左移 tab
-function! Tab_MoveLeft()
-	let l:tabnr = tabpagenr() - 2
-	if l:tabnr >= 0
-		exec 'tabmove '.l:tabnr
-	endif
-endfunc
-
-" 右移 tab
-function! Tab_MoveRight()
-	let l:tabnr = tabpagenr() + 1
-	if l:tabnr <= tabpagenr('$')
-		exec 'tabmove '.l:tabnr
-	endif
-endfunc
-
-noremap <silent><leader>tl :call Tab_MoveLeft()<cr>
-noremap <silent><leader>tr :call Tab_MoveRight()<cr>
-noremap <silent><m-left> :call Tab_MoveLeft()<cr>
-noremap <silent><m-right> :call Tab_MoveRight()<cr>
-
+" These commands will move the current buffer backwards or forwards in the bufferline
+nnoremap <silent><m-right> :BufferLineMoveNext<CR>
+nnoremap <silent><m-left> :BufferLineMovePrev<CR>
 
 "----------------------------------------------------------------------
 " ALT 键移动增强
