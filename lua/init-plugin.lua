@@ -225,7 +225,7 @@
     -- };
     -- globally enable default icons (default to false)
     -- will get overriden by `get_icons` option
-    default = false;
+    default = true;
   }   
 
   local actions = require('telescope.actions')
@@ -648,7 +648,7 @@ require('bufferline').setup {
     --   end
     -- end,
     offsets = {{filetype = "NvimTree", text = "File Explorer", text_align = "left" }},
-    show_buffer_icons = false , -- disable filetype icons for buffers
+    show_buffer_icons = true , -- disable filetype icons for buffers
     show_buffer_close_icons = false,
     show_close_icon = false,
     show_tab_indicators = true ,
