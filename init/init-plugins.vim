@@ -176,6 +176,9 @@ if index(g:bundle_group, 'basic') >= 0
 	Plug 'morhetz/gruvbox'
   Plug 'sainnhe/gruvbox-material'
   Plug 'ayu-theme/ayu-vim' 
+  Plug 'luisiacc/gruvbox-baby', {'branch': 'main'}
+  Plug 'rebelot/kanagawa.nvim'
+  Plug 'sainnhe/everforest'
 	" Plug 'itchyny/landscape.vim'
 	" Plug 'kaicataldo/material.vim'
 	" Plug 'rakr/vim-one'
@@ -1079,8 +1082,8 @@ if index(g:bundle_group, 'lua') >= 0
       \   }
       \ }
   
-  nnoremap <C-n> :NvimTreeToggle<CR>
-  nnoremap <leader>r :NvimTreeRefresh<CR>
+  nnoremap <C-n> :NvimTreeToggle<CR>:NvimTreeRefresh<CR>
+  " nnoremap <leader>r :NvimTreeRefresh<CR>
   " nnoremap <leader>n :NvimTreeFindFile<CR>
   " More available functions:
   " NvimTreeOpen
@@ -1167,6 +1170,6 @@ nnoremap <space>b <cmd>lua require'telescope.builtin'.current_buffer_fuzzy_find{
 nnoremap <space>h <cmd>lua require'telescope.builtin'.oldfiles{}<CR>
 nnoremap <space>s <cmd>lua require'telescope.builtin'.live_grep{}<CR>
 nnoremap <space>t <cmd>lua require('telescope').extensions.asynctasks.all()<CR>
-nnoremap <space>e <cmd>lua require "telescope".extensions.file_browser.file_browser({cwd_to_path=true,path=vim.call("expand","%:p:h")})<CR>
+nnoremap <space>e <cmd>lua require "telescope".extensions.file_browser.file_browser({cwd_to_path=true,path=vim.call("asyncrun#get_root","%")})<CR>
 
 endif

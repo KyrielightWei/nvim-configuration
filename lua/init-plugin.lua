@@ -235,7 +235,8 @@
       -- Default configuration for telescope goes here:
       -- config_key = value,
       -- path_display = "smart";
-            color_devicons = false,
+            theme = everforest,
+            color_devicons = true,
             -- Format path as "file.txt (path\to\file\)"
             path_display = function(opts, path)
               -- local tail = require("telescope.utils").path_tail(path)
@@ -341,7 +342,7 @@
   require('lualine').setup {
     options = {
       icons_enabled = false,
-      theme = 'horizon',
+      theme = 'everforest',
       component_separators = { left = '', right = ''},
       section_separators = { left = '', right = ''},
       disabled_filetypes = {},
@@ -480,7 +481,7 @@
   
     -- Override default virtual text prefix
     -- Default: '-->'
-    prefix = '->',
+    prefix = '炙',
   
     -- Override the internal highlight group name
     -- Default: 'ContextVt'
@@ -546,7 +547,7 @@
 
   require("nvim-gps").setup({
 
-	  disable_icons = true,           -- Setting it to true will disable all icons
+	  disable_icons = false,           -- Setting it to true will disable all icons
 
 	  icons = {
 	  	["class-name"] = ' ',      -- Classes and class-like objects
@@ -580,7 +581,7 @@
 	  	--}
 	  },
 
-	  separator = ' @ ',
+	  -- separator = ' @ ',
 
 	  -- limit for amount of context shown
 	  -- 0 means no limit
@@ -661,4 +662,25 @@ require('bufferline').setup {
     sort_by = 'ordinal'       -- add custom logic
   }
 }
+
+-- Default options:
+require('kanagawa').setup({
+    undercurl = true,           -- enable undercurls
+    commentStyle = "italic",
+    functionStyle = "bold",
+    keywordStyle = "italic",
+    statementStyle = "bold",
+    typeStyle = "bold",
+    variablebuiltinStyle = "italic",
+    specialReturn = true,       -- special highlight for the return keyword
+    specialException = true,    -- special highlight for exception handling keywords
+    transparent = false,        -- do not set background color
+    dimInactive = false,        -- dim inactive window `:h hl-NormalNC`
+    globalStatus = false,       -- adjust window separators highlight for laststatus=3
+    colors = {},
+    overrides = {},
+})
+
+
+
 

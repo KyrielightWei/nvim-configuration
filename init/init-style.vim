@@ -56,13 +56,13 @@ endif
 " set termguicolors
 
 " 设置颜色主题，会在所有 runtimepaths 的 colors 目录寻找同名配置
-let g:gruvbox_material_background = 'hard'
-let g:gruvbox_material_disable_italic_comment = 0
-let g:gruvbox_material_enable_bold = 1
-let g:gruvbox_material_enable_italic = 1
+" let g:gruvbox_material_background = 'hard'
+" let g:gruvbox_material_disable_italic_comment = 0
+" let g:gruvbox_material_enable_bold = 1
+" let g:gruvbox_material_enable_italic = 1
 " let g:gruvbox_material_visual = 'reverse'
-colorscheme gruvbox-material
-
+colorscheme everforest
+   
 
 "----------------------------------------------------------------------
 " 状态栏设置
