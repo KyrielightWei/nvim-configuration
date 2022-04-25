@@ -147,6 +147,97 @@
                   }
   }
 
+  -- require('lspconfig').clangd.setup {
+  --   on_attach = on_attach,
+  --   flags = {
+  --     -- This will be the default in neovim 0.7+
+  --     debounce_text_changes = 150,
+  --     filetypes = {"c", "cpp", "ipp", "cuda","ic","objc", "objcpp"};
+  --     root_dir = util.root_pattern("compile_commands.json", ".ccls",".git",".svn");
+  --   }
+  -- }
+
+  -- require("clangd_extensions").setup {
+  --     server = {
+  --         -- options to pass to nvim-lspconfig
+  --         -- i.e. the arguments to require("lspconfig").clangd.setup({})
+  --       "--limit-references=0",
+  --       "--limit-results=0",
+  --       "--inlay-hints",
+  --       "--background-index",
+  --       "--header-insertion = iwyu",
+  --       "--clang-tidy",
+  --       "-j=4",
+  --       "--pch-storage=memory",
+  --       "--malloc-trim",
+  --     },
+  --     extensions = {
+  --         -- defaults:
+  --         -- Automatically set inlay hints (type hints)
+  --         autoSetHints = true,
+  --         -- Whether to show hover actions inside the hover window
+  --         -- This overrides the default hover handler
+  --         hover_with_actions = true,
+  --         -- These apply to the default ClangdSetInlayHints command
+  --         inlay_hints = {
+  --             -- Only show inlay hints for the current line
+  --             only_current_line = false,
+  --             -- Event which triggers a refersh of the inlay hints.
+  --             -- You can make this "CursorMoved" or "CursorMoved,CursorMovedI" but
+  --             -- not that this may cause  higher CPU usage.
+  --             -- This option is only respected when only_current_line and
+  --             -- autoSetHints both are true.
+  --             only_current_line_autocmd = "CursorHold",
+  --             -- whether to show parameter hints with the inlay hints or not
+  --             show_parameter_hints = true,
+  --             -- prefix for parameter hints
+  --             parameter_hints_prefix = "<- ",
+  --             -- prefix for all the other hints (type, chaining)
+  --             other_hints_prefix = "=> ",
+  --             -- whether to align to the length of the longest line in the file
+  --             max_len_align = false,
+  --             -- padding from the left if max_len_align is true
+  --             max_len_align_padding = 1,
+  --             -- whether to align to the extreme right or not
+  --             right_align = false,
+  --             -- padding from the right if right_align is true
+  --             right_align_padding = 7,
+  --             -- The color of the hints
+  --             highlight = "Comment",
+  --         },
+  --         ast = {
+  --             role_icons = {
+  --                 type = "type",
+  --                 declaration = "dec",
+  --                 expression = "expr",
+  --                 specifier = "spec",
+  --                 statement = "stat",
+  --                 ["template argument"] = "Targ",
+  --             },
+  -- 
+  --             kind_icons = {
+  --                 Compound = "-",
+  --                 Recovery = "-",
+  --                 TranslationUnit = "-",
+  --                 PackExpansion = "-",
+  --                 TemplateTypeParm = "-",
+  --                 TemplateTemplateParm = "-",
+  --                 TemplateParamObject = "-",
+  --             },
+  -- 
+  --             highlights = {
+  --                 detail = "Comment",
+  --             },
+  --         memory_usage = {
+  --             border = "none",
+  --         },
+  --         symbol_info = {
+  --             border = "none",
+  --         },
+  --     },
+  --   },
+  -- }
+
   -- Setup nvim-tree
   require'nvim-tree'.setup {
     -- 关闭文件时自动关闭
@@ -445,7 +536,7 @@
     },
     current_line_blame_formatter = '<author>, <author_time:%Y-%m-%d> - <summary>',
     sign_priority = 6,
-    update_debounce = 100,
+    update_debounce = 10,
     status_formatter = nil, -- Use default
     max_file_length = 40000,
     preview_config = {
@@ -593,7 +684,7 @@
 
 require('bufferline').setup {
   options = {
-    mode = "tabs", -- set to "tabs" to only show tabpages instead
+    mode = "buffers", -- set to "tabs" to only show tabpages instead
     numbers = function(opts)
       return string.format('%s|%s', opts.lower(opts.id), opts.ordinal)
     end,

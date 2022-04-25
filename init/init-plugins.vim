@@ -1138,6 +1138,8 @@ if index(g:bundle_group, 'lua') >= 0
     Plug 'haringsrob/nvim_context_vt'
     Plug 'SmiteshP/nvim-gps'
     Plug 'akinsho/bufferline.nvim'
+    nnoremap <silent> <leader>p :BufferLinePick<CR>
+    " Plug 'p00f/clangd_extensions.nvim'
 endif
 
 "----------------------------------------------------------------------
@@ -1166,7 +1168,7 @@ nnoremap <space>o <cmd>lua require'telescope.builtin'.lsp_document_symbols{}<CR>
 nnoremap <space>w <cmd>lua require'telescope.builtin'.lsp_workspace_symbols{}<CR>
 nnoremap <space>f <cmd>lua require'telescope.builtin'.find_files({cwd=vim.call("asyncrun#get_root","%")})<CR>
 nnoremap <space>g <cmd>lua require'telescope.builtin'.git_files{}<CR>
-nnoremap <space>b <cmd>lua require'telescope.builtin'.current_buffer_fuzzy_find{}<CR>
+nnoremap <space>b <cmd>lua require'telescope.builtin'.buffers{}<CR>
 nnoremap <space>h <cmd>lua require'telescope.builtin'.oldfiles{}<CR>
 nnoremap <space>s <cmd>lua require'telescope.builtin'.live_grep{}<CR>
 nnoremap <space>t <cmd>lua require('telescope').extensions.asynctasks.all()<CR>
