@@ -68,16 +68,16 @@ cnoremap <c-_> <c-k>
 " noremap <silent><leader>8 8gt<cr>
 " noremap <silent><leader>9 9gt<cr>
 " noremap <silent><leader>0 10gt<cr>
-  nnoremap <silent><leader>1 <Cmd>BufferLineGoToBuffer 1<CR>
-  nnoremap <silent><leader>2 <Cmd>BufferLineGoToBuffer 2<CR>
-  nnoremap <silent><leader>3 <Cmd>BufferLineGoToBuffer 3<CR>
-  nnoremap <silent><leader>4 <Cmd>BufferLineGoToBuffer 4<CR>
-  nnoremap <silent><leader>5 <Cmd>BufferLineGoToBuffer 5<CR>
-  nnoremap <silent><leader>6 <Cmd>BufferLineGoToBuffer 6<CR>
-  nnoremap <silent><leader>7 <Cmd>BufferLineGoToBuffer 7<CR>
-  nnoremap <silent><leader>8 <Cmd>BufferLineGoToBuffer 8<CR>
-  nnoremap <silent><leader>9 <Cmd>BufferLineGoToBuffer 9<CR>
-  nnoremap <silent><leader>0 <Cmd>BufferLineGoToBuffer 10<CR>
+  nnoremap <silent><leader>1 <Cmd>BufferGoto 1<CR>
+  nnoremap <silent><leader>2 <Cmd>BufferGoto 2<CR>
+  nnoremap <silent><leader>3 <Cmd>BufferGoto 3<CR>
+  nnoremap <silent><leader>4 <Cmd>BufferGoto 4<CR>
+  nnoremap <silent><leader>5 <Cmd>BufferGoto 5<CR>
+  nnoremap <silent><leader>6 <Cmd>BufferGoto 6<CR>
+  nnoremap <silent><leader>7 <Cmd>BufferGoto 7<CR>
+  nnoremap <silent><leader>8 <Cmd>BufferGoto 8<CR>
+  nnoremap <silent><leader>9 <Cmd>BufferGoto 9<CR>
+  nnoremap <silent><leader>0 <Cmd>BufferLast<CR>
 
 
 "----------------------------------------------------------------------
@@ -104,16 +104,16 @@ cnoremap <c-_> <c-k>
 " inoremap <silent><m-9> <ESC>:tabn 9<cr>
 " inoremap <silent><m-0> <ESC>:tabn 10<cr>
 
-  nnoremap <silent><m-1> <Cmd>BufferLineGoToBuffer 1<CR>
-  nnoremap <silent><m-2> <Cmd>BufferLineGoToBuffer 2<CR>
-  nnoremap <silent><m-3> <Cmd>BufferLineGoToBuffer 3<CR>
-  nnoremap <silent><m-4> <Cmd>BufferLineGoToBuffer 4<CR>
-  nnoremap <silent><m-5> <Cmd>BufferLineGoToBuffer 5<CR>
-  nnoremap <silent><m-6> <Cmd>BufferLineGoToBuffer 6<CR>
-  nnoremap <silent><m-7> <Cmd>BufferLineGoToBuffer 7<CR>
-  nnoremap <silent><m-8> <Cmd>BufferLineGoToBuffer 8<CR>
-  nnoremap <silent><m-9> <Cmd>BufferLineGoToBuffer 9<CR>
-  nnoremap <silent><m-0> <Cmd>BufferLineGoToBuffer 10<CR>
+  nnoremap <silent><m-1> <Cmd>BufferGoto 1<CR>
+  nnoremap <silent><m-2> <Cmd>BufferGoto 2<CR>
+  nnoremap <silent><m-3> <Cmd>BufferGoto 3<CR>
+  nnoremap <silent><m-4> <Cmd>BufferGoto 4<CR>
+  nnoremap <silent><m-5> <Cmd>BufferGoto 5<CR>
+  nnoremap <silent><m-6> <Cmd>BufferGoto 6<CR>
+  nnoremap <silent><m-7> <Cmd>BufferGoto 7<CR>
+  nnoremap <silent><m-8> <Cmd>BufferGoto 8<CR>
+  nnoremap <silent><m-9> <Cmd>BufferGoto 9<CR>
+  nnoremap <silent><m-0> <Cmd>BufferLast<CR>
 
 " MacVim 允许 CMD+数字键快速切换标签
 " if has("gui_macvim")
@@ -185,12 +185,15 @@ noremap <silent> <leader>tq :tabclose<cr>
 " These commands will navigate through buffers in order
 " regardless of which mode you are using  e.g. if you change
 " the order of buffers :bnext and :bprevious will not respect the custom ordering
-nnoremap <silent> <leader>tn :BufferLineCycleNext<CR>
-nnoremap <silent> <leader>tp :BufferLineCyclePrev<CR>
+nnoremap <silent> <leader>tn :BufferMoveNext<CR>
+nnoremap <silent> <leader>tp :BufferMovePrevious<CR>
 
 " These commands will move the current buffer backwards or forwards in the bufferline
-nnoremap <silent><m-right> :BufferLineMoveNext<CR>
-nnoremap <silent><m-left> :BufferLineMovePrev<CR>
+nnoremap <silent><m-right> <Cmd>BufferMoveNext<CR>
+nnoremap <silent><m-left> <Cmd>BufferMovePrevious<CR>
+
+nnoremap <silent><m-c> <Cmd>BufferClose<CR>
+nnoremap <silent><m-p> <Cmd>BufferPin<CR>
 
 "----------------------------------------------------------------------
 " ALT 键移动增强

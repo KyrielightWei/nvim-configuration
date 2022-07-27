@@ -1,3 +1,53 @@
+  require('lspkind').init({
+      -- DEPRECATED (use mode instead): enables text annotations
+      --
+      -- default: true
+      -- with_text = true,
+  
+      -- defines how annotations are shown
+      -- default: symbol
+      -- options: 'text', 'text_symbol', 'symbol_text', 'symbol'
+      mode = 'symbol_text',
+  
+      -- default symbol map
+      -- can be either 'default' (requires nerd-fonts font) or
+      -- 'codicons' for codicon preset (requires vscode-codicons font)
+      --
+      -- default: 'default'
+      preset = 'codicons',
+  
+      -- override preset symbols
+      --
+      -- default: {}
+      symbol_map = {
+        Text = "",
+        Method = "",
+        Function = "",
+        Constructor = "",
+        Field = "ﰠ",
+        Variable = "",
+        Class = "ﴯ",
+        Interface = "",
+        Module = "",
+        Property = "ﰠ",
+        Unit = "塞",
+        Value = "",
+        Enum = "",
+        Keyword = "",
+        Snippet = "",
+        Color = "",
+        File = "",
+        Reference = "",
+        Folder = "",
+        EnumMember = "",
+        Constant = "",
+        Struct = "פּ",
+        Event = "",
+        Operator = "",
+        TypeParameter = ""
+      },
+  })
+
 -- Setup nvim-cmp.
   local cmp = require'cmp'
   local lspkind = require('lspkind')
@@ -15,19 +65,19 @@
     formatting = {
       format = lspkind.cmp_format({
       mode = "symbol_text",
-      menu = ({
-        nvim_lsp = "[LSP]",
-        vsnip = "[Vsnip]",
-        dictionary = "[Dict]",
-        buffer = "[Buffer]",
-        treesitter = "[Treesitter]",
-        nvim_lsp_document_symbol = "[LSP]",
-        rg = "[Rg]",
-        nvim_lsp_signature_help = "[LSP]",
-        path = "[Path]",
-        cmdline = "[Cmdline]",
-        latex_symbols = "[Latex]",
-      })
+      -- menu = ({
+      --   nvim_lsp = "[LSP]",
+      --   vsnip = "[Vsnip]",
+      --   dictionary = "[Dict]",
+      --   buffer = "[Buffer]",
+      --   treesitter = "[Treesitter]",
+      --   nvim_lsp_document_symbol = "[LSP]",
+      --   rg = "[Rg]",
+      --   nvim_lsp_signature_help = "[LSP]",
+      --   path = "[Path]",
+      --   cmdline = "[Cmdline]",
+      --   latex_symbols = "[Latex]",
+      -- })
     })
     },
     mapping = {
@@ -35,6 +85,13 @@
       ['<C-f>'] = cmp.mapping(cmp.mapping.scroll_docs(4), { 'i', 'c' }),
       ['<C-Space>'] = cmp.mapping(cmp.mapping.complete(), { 'i', 'c' }),
       ['<C-y>'] = cmp.config.disable, -- Specify `cmp.config.disable` if you want to remove the default `<C-y>` mapping.
+      ['<Tab>'] = function(fallback)
+        if cmp.visible() then
+          cmp.select_next_item()
+        else
+          fallback()
+        end
+      end,
       ['<C-e>'] = cmp.mapping({
         i = cmp.mapping.abort(),
         c = cmp.mapping.close(),
@@ -72,6 +129,7 @@
 
   -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
   cmp.setup.cmdline(':', {
+    mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
       { name = 'path' }
     }, {
@@ -113,9 +171,13 @@
   -- Setup lspconfig.
   local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
   local util = require 'lspconfig.util'
+  local navic = require("nvim-navic")
   -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
   require('lspconfig').ccls.setup {
-    on_attach = on_attach;
+    on_attach = function(client, bufnr)
+        navic.attach(client, bufnr)
+    end;
+    capabilities = capabilities;
     cmd ={"ccls"};
     filetypes = {"c", "cpp", "ipp", "cuda","ic","objc", "objcpp"};
     root_dir = util.root_pattern("compile_commands.json", ".ccls",".git",".svn");
@@ -241,10 +303,10 @@
   -- Setup nvim-tree
   require'nvim-tree'.setup {
     -- 关闭文件时自动关闭
-    auto_close = true,
     open_on_tab = false,
     open_on_setup = false,
     disable_netrw = true,
+    respect_buf_cwd = true,
     update_focused_file = {
       enable      = true,
       update_cwd  = false,
@@ -252,7 +314,10 @@
     },
     -- 不显示 git 状态图标
     git = {
-        enable = true
+        enable = true,
+        ignore = false,
+        show_on_dirs = true,
+        timeout = 400,
     },
     view = {
       mappings = 
@@ -298,8 +363,64 @@
          { key = "<leader>k",                        action = "toggle_file_info" },
          { key = ".",                            action = "run_file_command" },
       }
-    }
-    }
+    },
+    },
+          renderer = {
+        add_trailing = false,
+        group_empty = false,
+        highlight_git = false,
+        full_name = false,
+        highlight_opened_files = "none",
+        root_folder_modifier = ":~",
+        indent_markers = {
+          enable = false,
+          icons = {
+            corner = "└",
+            edge = "│",
+            item = "│",
+            none = " ",
+          },
+        },
+        icons = {
+          webdev_colors = true,
+          git_placement = "before",
+          padding = " ",
+          symlink_arrow = " ➛ ",
+          show = {
+            file = true,
+            folder = true,
+            folder_arrow = true,
+            git = true,
+          },
+          glyphs = {
+            default = "",
+            symlink = "",
+            bookmark = "",
+            folder = {
+              arrow_closed = "",
+              arrow_open = "",
+              default = "",
+              open = "",
+              empty = "",
+              empty_open = "",
+              symlink = "",
+              symlink_open = "",
+            },
+            git = {
+              unstaged = "✗",
+              staged = "✓",
+              unmerged = "",
+              renamed = "➜",
+              untracked = "★",
+              deleted = "",
+              ignored = "◌",
+            },
+          },
+        },
+        special_files = { "Cargo.toml", "Makefile", "README.md", "readme.md" },
+        symlink_destination = true,
+      },
+
   }
 
   require'nvim-web-devicons'.setup {
@@ -429,35 +550,73 @@
   --  cwd_to_path = true; 
   -- }
 
-  local gps = require("nvim-gps")
-  require('lualine').setup {
-    options = {
-      icons_enabled = false,
-      theme = 'everforest',
-      component_separators = { left = '', right = ''},
-      section_separators = { left = '', right = ''},
-      disabled_filetypes = {},
-      always_divide_middle = true,
-    },
-    sections = {
-      lualine_a = {'mode'},
-      lualine_b = {'branch', 'diff', 'diagnostics'},
-      lualine_c = {'filename', { gps.get_location, cond = gps.is_available },'lsp_progress'},
-      lualine_x = {'encoding', 'fileformat', 'filetype'},
-      lualine_y = {'progress'},
-      lualine_z = {'location'}
-    },
-    inactive_sections = {
-      lualine_a = {},
-      lualine_b = {},
-      lualine_c = {'filename'},
-      lualine_x = {'location'},
-      lualine_y = {},
-      lualine_z = {}
-    },
-    tabline = {},
-    extensions = {}
-  }
+ --  local navic = require("nvim-navic")
+	-- local components = {
+	-- 	active = {{}, {}, {}},
+	-- }
+	-- table.insert(components.active[1], {
+	-- 	provider = function()
+	-- 		return navic.get_location()
+	-- 	end,
+	-- 	enabled = function() return navic.is_available() end,
+	-- })
+ --  local gps = require("nvim-gps")
+ --  require('lualine').setup {
+ --    options = {
+ --      icons_enabled = false,
+ --      theme = 'sonokai',
+ --      component_separators = { left = '', right = ''},
+ --      section_separators = { left = '', right = ''},
+ --      disabled_filetypes = {},
+ --      always_divide_middle = true,
+ --    },
+ --    sections = {
+ --      lualine_a = {'mode'},
+ --      lualine_b = {'branch', 'diff', 'diagnostics'},
+ --      lualine_c = {{'filename',
+ --                     file_status = true,
+ --                     path = 1,
+ --                     shorting_target=80,
+ --                      symbols = {
+ --
+ --                        modified = '[+]',
+ --                        readonly = '[-]',
+ --                        unnamed = '[No Name]',
+ --
+ --                      }}
+ --                    ,'lsp_progress'},
+ --      lualine_x = {'encoding', 'fileformat', 'filetype'},
+ --      lualine_y = {'progress'},
+ --      lualine_z = {'location'}
+ --    },
+ --    inactive_sections = {
+ --      lualine_a = {},
+ --      lualine_b = {},
+ --      lualine_c = {'filename'},
+ --      lualine_x = {'location'},
+ --      lualine_y = {},
+ --      lualine_z = {}
+ --    },
+ --    winbar = {
+ --      lualine_a = {{ gps.get_location, cond = gps.is_available }},
+ --      lualine_b = {},
+ --      -- lualine_b = { {navic.get_location, cond = navic.is_available} },
+ --      lualine_c = {},
+ --      lualine_x = {},
+ --      lualine_y = {},
+ --      lualine_z = {'location'}
+ --    },
+ --    inactive_winbar = {
+ --      -- lualine_a = {'filename'},
+ --      -- lualine_b = {},
+ --      -- lualine_c = {},
+ --      -- lualine_x = {},
+ --      -- lualine_y = {},
+ --      -- lualine_z = {'location'}
+ --    },
+ --    inactive_tabline= {},
+ --    extensions = {}
+ --  }
 
   require'nvim-treesitter.configs'.setup {
     -- One of "all", "maintained" (parsers with maintainers), or a list of languages
@@ -636,6 +795,41 @@
   })
 
 
+  navic.setup {
+     icons = {
+         File          = " ",
+         Module        = " ",
+         Namespace     = " ",
+         Package       = " ",
+         Class         = " ",
+         Method        = " ",
+         Property      = " ",
+         Field         = " ",
+         Constructor   = " ",
+         Enum          = "練",
+         Interface     = "練",
+         Function      = " ",
+         Variable      = " ",
+         Constant      = " ",
+         String        = " ",
+         Number        = " ",
+         Boolean       = "◩ ",
+         Array         = " ",
+         Object        = " ",
+         Key           = " ",
+         Null          = "ﳠ ",
+         EnumMember    = " ",
+         Struct        = " ",
+         Event         = " ",
+         Operator      = " ",
+         TypeParameter = " ",
+     },
+     highlight = false,
+     separator = " > ",
+     depth_limit = 0,
+     depth_limit_indicator = "..",
+  }
+
   require("nvim-gps").setup({
 
 	  disable_icons = false,           -- Setting it to true will disable all icons
@@ -676,102 +870,258 @@
 
 	  -- limit for amount of context shown
 	  -- 0 means no limit
-	  depth = 1,
+	  depth = 0,
 
 	  -- indicator used when context hits depth limit
 	  depth_limit_indicator = "..."
-  })  
+  })
 
-require('bufferline').setup {
-  options = {
-    mode = "buffers", -- set to "tabs" to only show tabpages instead
-    numbers = function(opts)
-      return string.format('%s|%s', opts.lower(opts.id), opts.ordinal)
-    end,
-    -- close_command = "bdelete! %d",       -- can be a string | function, see "Mouse actions"
-    -- right_mouse_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
-    -- left_mouse_command = "buffer %d",    -- can be a string | function, see "Mouse actions"
-    -- middle_mouse_command = nil,          -- can be a string | function, see "Mouse actions"
-    -- NOTE: this plugin is designed with this icon in mind,
-    -- and so changing this is NOT recommended, this is intended
-    -- as an escape hatch for people who cannot bear it for whatever reason
-    indicator_icon = '▎',
-    buffer_close_icon = 'bx',
-    modified_icon = '●',
-    close_icon = 'x',
-    left_trunc_marker = '',
-    right_trunc_marker = '',
-    --- name_formatter can be used to change the buffer's label in the bufferline.
-    --- Please note some names can/will break the
-    --- bufferline so use this at your discretion knowing that it has
-    --- some limitations that will *NOT* be fixed.
-    -- name_formatter = function(buf)  -- buf contains a "name", "path" and "bufnr"
-    --   -- remove extension from markdown files for example
-    --   if buf.name:match('%.md') then
-    --     return vim.fn.fnamemodify(buf.name, ':t:r')
-    --   end
-    -- end,
-    max_name_length = 18,
-    max_prefix_length = 15, -- prefix used when a buffer is de-duplicated
-    tab_size = 18,
-    diagnostics =  "nvim_lsp" ,
-    diagnostics_update_in_insert = false,
-    diagnostics_indicator = function(count, level, diagnostics_dict, context)
-      return "("..count..")"
-    end,
-    -- NOTE: this will be called a lot so don't do any heavy processing here
-    -- custom_filter = function(buf_number, buf_numbers)
-    --   -- filter out filetypes you don't want to see
-    --   if vim.bo[buf_number].filetype ~= "<i-dont-want-to-see-this>" then
-    --     return true
-    --   end
-    --   -- filter out by buffer name
-    --   if vim.fn.bufname(buf_number) ~= "<buffer-name-I-dont-want>" then
-    --     return true
-    --   end
-    --   -- filter out based on arbitrary rules
-    --   -- e.g. filter out vim wiki buffer from tabline in your work repo
-    --   if vim.fn.getcwd() == "<work-repo>" and vim.bo[buf_number].filetype ~= "wiki" then
-    --     return true
-    --   end
-    --   -- filter out y it's index number in list (don't show first buffer)
-    --   if buf_numbers[1] ~= buf_number then
-    --     return true
-    --   end
-    -- end,
-    offsets = {{filetype = "NvimTree", text = "File Explorer", text_align = "left" }},
-    show_buffer_icons = true , -- disable filetype icons for buffers
-    show_buffer_close_icons = false,
-    show_close_icon = false,
-    show_tab_indicators = true ,
-    persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
-    -- can also be a table containing 2 custom separators
-    -- [focused and unfocused]. eg: { '|', '|' }
-    separator_style =  { 'any', 'any' },
-    enforce_regular_tabs = false ,
-    always_show_bufferline = true ,
-    sort_by = 'ordinal'       -- add custom logic
-  }
+-- require('bufferline').setup {
+--   options = {
+--     mode = "buffers", -- set to "tabs" to only show tabpages instead
+--     numbers = function(opts)
+--       return string.format('%s|%s', opts.lower(opts.id), opts.ordinal)
+--     end,
+--     -- close_command = "bdelete! %d",       -- can be a string | function, see "Mouse actions"
+--     -- right_mouse_command = "bdelete! %d", -- can be a string | function, see "Mouse actions"
+--     -- left_mouse_command = "buffer %d",    -- can be a string | function, see "Mouse actions"
+--     -- middle_mouse_command = nil,          -- can be a string | function, see "Mouse actions"
+--     -- NOTE: this plugin is designed with this icon in mind,
+--     -- and so changing this is NOT recommended, this is intended
+--     -- as an escape hatch for people who cannot bear it for whatever reason
+--     indicator_icon = '▎',
+--     buffer_close_icon = '',
+--     modified_icon = '●',
+--     close_icon = '',
+--     left_trunc_marker = '',
+--     right_trunc_marker = '',
+--     --- name_formatter can be used to change the buffer's label in the bufferline.
+--     --- Please note some names can/will break the
+--     --- bufferline so use this at your discretion knowing that it has
+--     --- some limitations that will *NOT* be fixed.
+--     -- name_formatter = function(buf)  -- buf contains a "name", "path" and "bufnr"
+--     --   -- remove extension from markdown files for example
+--     --   if buf.name:match('%.md') then
+--     --     return vim.fn.fnamemodify(buf.name, ':t:r')
+--     --   end
+--     -- end,
+--     max_name_length = 18,
+--     max_prefix_length = 15, -- prefix used when a buffer is de-duplicated
+--     tab_size = 18,
+--     diagnostics =  "nvim_lsp" ,
+--     diagnostics_update_in_insert = false,
+--     diagnostics_indicator = function(count, level, diagnostics_dict, context)
+--       return "("..count..")"
+--     end,
+--     -- NOTE: this will be called a lot so don't do any heavy processing here
+--     -- custom_filter = function(buf_number, buf_numbers)
+--     --   -- filter out filetypes you don't want to see
+--     --   if vim.bo[buf_number].filetype ~= "<i-dont-want-to-see-this>" then
+--     --     return true
+--     --   end
+--     --   -- filter out by buffer name
+--     --   if vim.fn.bufname(buf_number) ~= "<buffer-name-I-dont-want>" then
+--     --     return true
+--     --   end
+--     --   -- filter out based on arbitrary rules
+--     --   -- e.g. filter out vim wiki buffer from tabline in your work repo
+--     --   if vim.fn.getcwd() == "<work-repo>" and vim.bo[buf_number].filetype ~= "wiki" then
+--     --     return true
+--     --   end
+--     --   -- filter out y it's index number in list (don't show first buffer)
+--     --   if buf_numbers[1] ~= buf_number then
+--     --     return true
+--     --   end
+--     -- end,
+--     offsets = {{filetype = "NvimTree", text = "File Explorer", text_align = "left" }},
+--     show_buffer_icons = true , -- disable filetype icons for buffers
+--     show_buffer_close_icons = false,
+--     show_close_icon = false,
+--     show_tab_indicators = true ,
+--     persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
+--     -- can also be a table containing 2 custom separators
+--     -- [focused and unfocused]. eg: { '|', '|' }
+--     separator_style =  { 'any', 'any' },
+--     enforce_regular_tabs = false ,
+--     always_show_bufferline = true ,
+--     sort_by = 'ordinal'       -- add custom logic
+--   }
+-- }
+
+-- Set barbar's options
+require'bufferline'.setup {
+  -- Enable/disable animations
+  animation = true,
+
+  -- Enable/disable auto-hiding the tab bar when there is a single buffer
+  auto_hide = false,
+
+  -- Enable/disable current/total tabpages indicator (top right corner)
+  tabpages = true,
+
+  -- Enable/disable close button
+  closable = true,
+
+  -- Enables/disable clickable tabs
+  --  - left-click: go to buffer
+  --  - middle-click: delete buffer
+  clickable = true,
+
+  -- Excludes buffers from the tabline
+  exclude_ft = {'javascript'},
+  exclude_name = {'package.json'},
+
+  -- Enable/disable icons
+  -- if set to 'numbers', will show buffer index in the tabline
+  -- if set to 'both', will show buffer index and icons in the tabline
+  icons = true,
+
+  -- If set, the icon color will follow its corresponding buffer
+  -- highlight group. By default, the Buffer*Icon group is linked to the
+  -- Buffer* group (see Highlighting below). Otherwise, it will take its
+  -- default value as defined by devicons.
+  icon_custom_colors = false,
+
+  -- Configure icons on the bufferline.
+  icon_separator_active = '▎',
+  icon_separator_inactive = '▎',
+  icon_close_tab = '',
+  icon_close_tab_modified = '●',
+  icon_pinned = '車',
+
+  -- If true, new buffers will be inserted at the start/end of the list.
+  -- Default is to insert after current buffer.
+  insert_at_end = false,
+  insert_at_start = false,
+
+  -- Sets the maximum padding width with which to surround each tab
+  maximum_padding = 1,
+
+  -- Sets the maximum buffer name length.
+  maximum_length = 30,
+
+  -- If set, the letters for each buffer in buffer-pick mode will be
+  -- assigned based on their name. Otherwise or in case all letters are
+  -- already assigned, the behavior is to assign letters in order of
+  -- usability (see order below)
+  semantic_letters = true,
+
+  -- New buffer letters are assigned in this order. This order is
+  -- optimal for the qwerty keyboard layout but might need adjustement
+  -- for other layouts.
+  letters = 'asdfjkl;ghnmxcvbziowerutyqpASDFJKLGHNMXCVBZIOWERUTYQP',
+
+  -- Sets the name of unnamed buffers. By default format is "[Buffer X]"
+  -- where X is the buffer number. But only a static string is accepted here.
+  no_name_title = nil,
 }
 
+ local db = require('dashboard')
+ db.custom_header = 
+ {
+    '',
+    '',
+    '        ⢀⣴⡾⠃⠄⠄⠄⠄⠄⠈⠺⠟⠛⠛⠛⠛⠻⢿⣿⣿⣿⣿⣶⣤⡀  ',
+    '      ⢀⣴⣿⡿⠁⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⠄⣸⣿⣿⣿⣿⣿⣿⣿⣷ ',
+    '     ⣴⣿⡿⡟⡼⢹⣷⢲⡶⣖⣾⣶⢄⠄⠄⠄⠄⠄⢀⣼⣿⢿⣿⣿⣿⣿⣿⣿⣿ ',
+    '    ⣾⣿⡟⣾⡸⢠⡿⢳⡿⠍⣼⣿⢏⣿⣷⢄⡀⠄⢠⣾⢻⣿⣸⣿⣿⣿⣿⣿⣿⣿ ',
+    '  ⣡⣿⣿⡟⡼⡁⠁⣰⠂⡾⠉⢨⣿⠃⣿⡿⠍⣾⣟⢤⣿⢇⣿⢇⣿⣿⢿⣿⣿⣿⣿⣿ ',
+    ' ⣱⣿⣿⡟⡐⣰⣧⡷⣿⣴⣧⣤⣼⣯⢸⡿⠁⣰⠟⢀⣼⠏⣲⠏⢸⣿⡟⣿⣿⣿⣿⣿⣿ ',
+    ' ⣿⣿⡟⠁⠄⠟⣁⠄⢡⣿⣿⣿⣿⣿⣿⣦⣼⢟⢀⡼⠃⡹⠃⡀⢸⡿⢸⣿⣿⣿⣿⣿⡟ ',
+    ' ⣿⣿⠃⠄⢀⣾⠋⠓⢰⣿⣿⣿⣿⣿⣿⠿⣿⣿⣾⣅⢔⣕⡇⡇⡼⢁⣿⣿⣿⣿⣿⣿⢣ ',
+    ' ⣿⡟⠄⠄⣾⣇⠷⣢⣿⣿⣿⣿⣿⣿⣿⣭⣀⡈⠙⢿⣿⣿⡇⡧⢁⣾⣿⣿⣿⣿⣿⢏⣾ ',
+    ' ⣿⡇⠄⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠟⢻⠇⠄⠄⢿⣿⡇⢡⣾⣿⣿⣿⣿⣿⣏⣼⣿ ',
+    ' ⣿⣷⢰⣿⣿⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⢰⣧⣀⡄⢀⠘⡿⣰⣿⣿⣿⣿⣿⣿⠟⣼⣿⣿ ',
+    ' ⢹⣿⢸⣿⣿⠟⠻⢿⣿⣿⣿⣿⣿⣿⣿⣶⣭⣉⣤⣿⢈⣼⣿⣿⣿⣿⣿⣿⠏⣾⣹⣿⣿ ',
+    ' ⢸⠇⡜⣿⡟⠄⠄⠄⠈⠙⣿⣿⣿⣿⣿⣿⣿⣿⠟⣱⣻⣿⣿⣿⣿⣿⠟⠁⢳⠃⣿⣿⣿ ',
+    '  ⣰⡗⠹⣿⣄⠄⠄⠄⢀⣿⣿⣿⣿⣿⣿⠟⣅⣥⣿⣿⣿⣿⠿⠋  ⣾⡌⢠⣿⡿⠃ ',
+    ' ⠜⠋⢠⣷⢻⣿⣿⣶⣾⣿⣿⣿⣿⠿⣛⣥⣾⣿⠿⠟⠛⠉            ',
+    '',
+    '',
+ }
+ -- db.default_executive = 'telescope'
+ db.session_directory = '~/.cache/nvim/session'
+ db.custom_center = {
+      {icon = '  ',
+      desc = 'Recently latest session                  ',
+      shortcut = 'SPC sl',
+      action ='SessionLoad'},
+      {icon = '  ',
+      desc = ' Recently opened files                   ',
+      action =  'DashboardFindHistory',
+      shortcut = 'SPC h '},
+      {icon = '  ',
+      desc = ' Find  File                              ',
+      action = 'Telescope find_files find_command=rg,--hidden,--files',
+      shortcut = 'SPC f '},
+      {icon = '  ',
+      desc =' File Browser                            ',
+      action =  'Telescope file_browser',
+      shortcut = 'SPC e '},
+      {icon = '  ',
+      desc = ' Find  word                              ',
+      action = 'Telescope live_grep',
+      shortcut = 'SPC s '},
+      -- {icon = '  ',
+      -- desc = 'Open Personal dotfiles                  ',
+      -- action = 'Telescope dotfiles path=' .. home ..'/.dotfiles',
+      -- shortcut = 'SPC f d'},
+    }
+  db.hide_statusline = false;
+  db.hide_tabline = true;
+
 -- Default options:
-require('kanagawa').setup({
-    undercurl = true,           -- enable undercurls
-    commentStyle = "italic",
-    functionStyle = "bold",
-    keywordStyle = "italic",
-    statementStyle = "bold",
-    typeStyle = "bold",
-    variablebuiltinStyle = "italic",
-    specialReturn = true,       -- special highlight for the return keyword
-    specialException = true,    -- special highlight for exception handling keywords
-    transparent = false,        -- do not set background color
-    dimInactive = false,        -- dim inactive window `:h hl-NormalNC`
-    globalStatus = false,       -- adjust window separators highlight for laststatus=3
-    colors = {},
-    overrides = {},
-})
+-- require('kanagawa').setup({
+--     undercurl = true,           -- enable undercurls
+--     commentStyle = "italic",
+--     functionStyle = "bold",
+--     keywordStyle = "italic",
+--     statementStyle = "bold",
+--     typeStyle = "bold",
+--     variablebuiltinStyle = "italic",
+--     specialReturn = true,       -- special highlight for the return keyword
+--     specialException = true,    -- special highlight for exception handling keywords
+--     transparent = false,        -- do not set background color
+--     dimInactive = false,        -- dim inactive window `:h hl-NormalNC`
+--     globalStatus = false,       -- adjust window separators highlight for laststatus=3
+--     colors = {},
+--     overrides = {},
+-- })
 
-
+-- require('winbar').setup({
+--     enabled = true,
+--
+--     show_file_path = true,
+--     show_symbols = true,
+--
+--     colors = {
+--         path = '', -- You can customize colors like #c946fd
+--         file_name = '',
+--         symbols = '',
+--     },
+--
+--     icons = {
+--         file_icon_default = '',
+--         seperator = '>',
+--         editor_state = '●',
+--         lock_icon = '',
+--     },
+--
+--     exclude_filetype = {
+--         'help',
+--         'startify',
+--         'dashboard',
+--         'packer',
+--         'neogitstatus',
+--         'NvimTree',
+--         'Trouble',
+--         'alpha',
+--         'lir',
+--         'Outline',
+--         'spectre_panel',
+--         'toggleterm',
+--         'qf',
+--     }
+-- })
 
 
