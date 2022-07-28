@@ -1098,8 +1098,12 @@ if index(g:bundle_group, 'lua') >= 0
   " a list of groups can be found at `:help nvim_tree_highlight`
   " highlight NvimTreeFolderIcon guibg=blue
 
-  Plug 'nvim-lualine/lualine.nvim'
+  " Plug 'nvim-lualine/lualine.nvim'
+  set termguicolors
+  Plug 'feline-nvim/feline.nvim'
+  Plug 'nvim-lua/lsp-status.nvim'
   Plug 'arkav/lualine-lsp-progress'
+  Plug 'j-hui/fidget.nvim'
 
   Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
   Plug 'GustavoKatel/telescope-asynctasks.nvim'
@@ -1163,6 +1167,7 @@ if index(g:bundle_group, 'lua') >= 0
 
 set completeopt=menu,menuone,noselect
 lua require('init-plugin')
+lua require('feline_components')
 
 nnoremap gd <cmd>lua require'telescope.builtin'.lsp_definitions{}<CR>
 nnoremap gr <cmd>lua require'telescope.builtin'.lsp_references{}<CR>

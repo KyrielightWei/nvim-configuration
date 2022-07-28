@@ -47,13 +47,13 @@ set splitright
 set background=dark
 
 " 允许 256 色
-if has("termguicolors")
-		" enable true color
-		set termguicolors
-else
-	set t_Co=256
-endif
-" set termguicolors
+" if has("termguicolors")
+" 		" enable true color
+" 		set termguicolors
+" else
+" 	set t_Co=256
+" endif
+set termguicolors
 
 " 设置颜色主题，会在所有 runtimepaths 的 colors 目录寻找同名配置
 " let g:gruvbox_material_background = 'hard'

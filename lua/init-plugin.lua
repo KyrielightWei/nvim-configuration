@@ -171,12 +171,9 @@
   -- Setup lspconfig.
   local capabilities = require('cmp_nvim_lsp').update_capabilities(vim.lsp.protocol.make_client_capabilities())
   local util = require 'lspconfig.util'
-  local navic = require("nvim-navic")
   -- Replace <YOUR_LSP_SERVER> with each lsp server you've enabled.
   require('lspconfig').ccls.setup {
-    on_attach = function(client, bufnr)
-        navic.attach(client, bufnr)
-    end;
+    on_attach = on_attach;     
     capabilities = capabilities;
     cmd ={"ccls"};
     filetypes = {"c", "cpp", "ipp", "cuda","ic","objc", "objcpp"};
@@ -560,63 +557,65 @@
 	-- 	end,
 	-- 	enabled = function() return navic.is_available() end,
 	-- })
- --  local gps = require("nvim-gps")
- --  require('lualine').setup {
- --    options = {
- --      icons_enabled = false,
- --      theme = 'sonokai',
- --      component_separators = { left = '', right = ''},
- --      section_separators = { left = '', right = ''},
- --      disabled_filetypes = {},
- --      always_divide_middle = true,
- --    },
- --    sections = {
- --      lualine_a = {'mode'},
- --      lualine_b = {'branch', 'diff', 'diagnostics'},
- --      lualine_c = {{'filename',
- --                     file_status = true,
- --                     path = 1,
- --                     shorting_target=80,
- --                      symbols = {
- --
- --                        modified = '[+]',
- --                        readonly = '[-]',
- --                        unnamed = '[No Name]',
- --
- --                      }}
- --                    ,'lsp_progress'},
- --      lualine_x = {'encoding', 'fileformat', 'filetype'},
- --      lualine_y = {'progress'},
- --      lualine_z = {'location'}
- --    },
- --    inactive_sections = {
- --      lualine_a = {},
- --      lualine_b = {},
- --      lualine_c = {'filename'},
- --      lualine_x = {'location'},
- --      lualine_y = {},
- --      lualine_z = {}
- --    },
- --    winbar = {
- --      lualine_a = {{ gps.get_location, cond = gps.is_available }},
- --      lualine_b = {},
- --      -- lualine_b = { {navic.get_location, cond = navic.is_available} },
- --      lualine_c = {},
- --      lualine_x = {},
- --      lualine_y = {},
- --      lualine_z = {'location'}
- --    },
- --    inactive_winbar = {
- --      -- lualine_a = {'filename'},
- --      -- lualine_b = {},
- --      -- lualine_c = {},
- --      -- lualine_x = {},
- --      -- lualine_y = {},
- --      -- lualine_z = {'location'}
- --    },
- --    inactive_tabline= {},
- --    extensions = {}
- --  }
+  -- local gps = require("nvim-gps")
+  -- require('lualine').setup {
+  --   options = {
+  --     icons_enabled = false,
+  --     theme = 'sonokai',
+  --     component_separators = { left = '', right = ''},
+  --     section_separators = { left = '', right = ''},
+  --     disabled_filetypes = {},
+  --     always_divide_middle = true,
+  --   },
+  --   sections = {
+  --     lualine_a = {'mode'},
+  --     lualine_b = {'branch', 'diff', 'diagnostics'},
+  --     lualine_c = {{'filename',
+  --                    file_status = true,
+  --                    path = 1,
+  --                    shorting_target=80,
+  --                     symbols = {
+  --
+  --                       modified = '[+]',
+  --                       readonly = '[-]',
+  --                       unnamed = '[No Name]',
+  --
+  --                     }}
+  --                   ,'lsp_progress'},
+  --     lualine_x = {'encoding', 'fileformat', 'filetype'},
+  --     lualine_y = {'progress'},
+  --     lualine_z = {'location'}
+  --   },
+  --   inactive_sections = {
+  --     lualine_a = {},
+  --     lualine_b = {},
+  --     lualine_c = {'filename'},
+  --     lualine_x = {'location'},
+  --     lualine_y = {},
+  --     lualine_z = {}
+  --   },
+  --   -- winbar = {
+  --   --   lualine_a = {{ gps.get_location, cond = gps.is_available }},
+  --   --   lualine_b = {},
+  --   --   -- lualine_b = { {navic.get_location, cond = navic.is_available} },
+  --   --   lualine_c = {},
+  --   --   lualine_x = {},
+  --   --   lualine_y = {},
+  --   --   lualine_z = {'location'}
+  --   -- },
+  --   -- inactive_winbar = {
+  --   --   -- lualine_a = {'filename'},
+  --   --   -- lualine_b = {},
+  --   --   -- lualine_c = {},
+  --   --   -- lualine_x = {},
+  --   --   -- lualine_y = {},
+  --   --   -- lualine_z = {'location'}
+  --   -- },
+  --   inactive_tabline= {},
+  --   extensions = {}
+  -- }
+  -- require('feline').setup()
+  -- require('feline').winbar.setup()
 
   require'nvim-treesitter.configs'.setup {
     -- One of "all", "maintained" (parsers with maintainers), or a list of languages
@@ -795,40 +794,40 @@
   })
 
 
-  navic.setup {
-     icons = {
-         File          = " ",
-         Module        = " ",
-         Namespace     = " ",
-         Package       = " ",
-         Class         = " ",
-         Method        = " ",
-         Property      = " ",
-         Field         = " ",
-         Constructor   = " ",
-         Enum          = "練",
-         Interface     = "練",
-         Function      = " ",
-         Variable      = " ",
-         Constant      = " ",
-         String        = " ",
-         Number        = " ",
-         Boolean       = "◩ ",
-         Array         = " ",
-         Object        = " ",
-         Key           = " ",
-         Null          = "ﳠ ",
-         EnumMember    = " ",
-         Struct        = " ",
-         Event         = " ",
-         Operator      = " ",
-         TypeParameter = " ",
-     },
-     highlight = false,
-     separator = " > ",
-     depth_limit = 0,
-     depth_limit_indicator = "..",
-  }
+  -- navic.setup {
+  --    icons = {
+  --        File          = " ",
+  --        Module        = " ",
+  --        Namespace     = " ",
+  --        Package       = " ",
+  --        Class         = " ",
+  --        Method        = " ",
+  --        Property      = " ",
+  --        Field         = " ",
+  --        Constructor   = " ",
+  --        Enum          = "練",
+  --        Interface     = "練",
+  --        Function      = " ",
+  --        Variable      = " ",
+  --        Constant      = " ",
+  --        String        = " ",
+  --        Number        = " ",
+  --        Boolean       = "◩ ",
+  --        Array         = " ",
+  --        Object        = " ",
+  --        Key           = " ",
+  --        Null          = "ﳠ ",
+  --        EnumMember    = " ",
+  --        Struct        = " ",
+  --        Event         = " ",
+  --        Operator      = " ",
+  --        TypeParameter = " ",
+  --    },
+  --    highlight = false,
+  --    separator = " > ",
+  --    depth_limit = 0,
+  --    depth_limit_indicator = "..",
+  -- }
 
   require("nvim-gps").setup({
 
@@ -1123,5 +1122,7 @@ require'bufferline'.setup {
 --         'qf',
 --     }
 -- })
+
+require"fidget".setup{}
 
 
