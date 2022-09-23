@@ -192,13 +192,14 @@
       cache= {
 											directory=".tmp/ccls_cache/";
                                retainInMemory= 1;
-															 format ="json";
+															 format ="binary";
 															 hierarchicalPath = false
                                };
                              clang={
                     pathMappings={}
 										};
                     index = {
+                      onChange = false;
                       trackDependency = 1;
                               threads = 4
                               };
@@ -228,7 +229,7 @@
 
   -- require("clangd_extensions").setup {
   --     server = {
-  --         -- options to pass to nvim-lspconfig
+  --        -- options to pass to nvim-lspconfig
   --         -- i.e. the arguments to require("lspconfig").clangd.setup({})
   --       "--limit-references=0",
   --       "--limit-results=0",

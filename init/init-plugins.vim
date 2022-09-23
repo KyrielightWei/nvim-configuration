@@ -1141,6 +1141,8 @@ if index(g:bundle_group, 'lua') >= 0
   "   \'',
   "   \]
 
+    Plug 'sindrets/diffview.nvim'
+
     Plug 'haringsrob/nvim_context_vt'
     Plug 'SmiteshP/nvim-navic'
     Plug 'SmiteshP/nvim-gps'

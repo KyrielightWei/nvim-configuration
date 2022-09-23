@@ -1,0 +1,1 @@
+{"cache": {"directory":".tmp/ccls_cache/","retainInMemory": -2,"format" :"binary","hierarchicalPath" : false},"clang":{"pathMappings":[]},"index" : {"onChange" : false,"trackDependency" : 1,"threads" : 4},"completion" : {"caseSensitivity": 2,"detailedLabel":true,"filterAndSort":true},"highlight" : {"lsRanges": true},"client" : {"snippetSupport":true}}
