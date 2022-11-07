@@ -189,8 +189,8 @@ nnoremap <silent> <leader>tn :BufferMoveNext<CR>
 nnoremap <silent> <leader>tp :BufferMovePrevious<CR>
 
 " These commands will move the current buffer backwards or forwards in the bufferline
-nnoremap <silent><m-right> <Cmd>BufferMoveNext<CR>
-nnoremap <silent><m-left> <Cmd>BufferMovePrevious<CR>
+nnoremap <silent><m-right> <Cmd>BufferNext<CR>
+nnoremap <silent><m-left> <Cmd>BufferPrevious<CR>
 
 nnoremap <silent><m-c> <Cmd>BufferClose<CR>
 nnoremap <silent><m-p> <Cmd>BufferPin<CR>
