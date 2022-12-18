@@ -189,32 +189,136 @@
     filetypes = {"c", "cpp", "ipp", "cuda","ic","objc", "objcpp"};
     root_dir = util.root_pattern("compile_commands.json", ".ccls",".git",".svn");
     init_options = {
-      cache= {
-											directory=".tmp/ccls_cache/";
-                               retainInMemory= 1;
-															 format ="binary";
-															 hierarchicalPath = false
-                               };
-                             clang={
-                    pathMappings={}
-										};
-                    index = {
-                      onChange = false;
-                      trackDependency = 1;
-                              threads = 4
-                              };
-                    completion = {
-                              caseSensitivity= 2;
-                              detailedLabel=true;
-                              filterAndSort=true
-                            };
-                    highlight = {
-                              lsRanges= true
-                            };
-						client = {
-											snippetSupport=true
-										};
-                  }
+        compilationDatabaseCommand = "",
+        compilationDatabaseDirectory = "",
+        cache = {
+            directory = ".ccls-cache",
+            format = "json",
+            hierarchicalPath = false,
+            retainInMemory = 2
+        },
+        capabilities = {
+            documentOnTypeFormattingProvider = {
+                firstTriggerCharacter = "}",
+                moreTriggerCharacter = {}
+            },
+            foldingRangeProvider = true,
+            workspace = {
+                workspaceFolders = {
+                    supported = true,
+                    changeNotifications = true
+                }
+            }
+        },
+        clang = {
+            excludeArgs = {},
+            extraArgs = {},
+            pathMappings = {},
+            resourceDir = ""
+        },
+        client = {
+            diagnosticsRelatedInformation = true,
+            hierarchicalDocumentSymbolSupport = true,
+            linkSupport = true,
+            snippetSupport = true
+        },
+        codeLens = {
+            localVariables = true
+        },
+        completion = {
+            caseSensitivity = 2,
+            detailedLabel = true,
+            dropOldRequests = true,
+            duplicateOptional = true,
+            filterAndSort = true,
+            include = {
+                blacklist = {},
+                maxPathSize = 30,
+                suffixWhitelist = {
+                    ".h",
+                    ".hpp",
+                    ".hh",
+                    ".inc"
+                },
+                whitelist = {}
+            },
+            maxNum = 100,
+            placeholder = true
+        },
+        diagnostics = {
+            blacklist = {},
+            onChange = 1000,
+            onOpen = 0,
+            onSave = 0,
+            spellChecking = true,
+            whitelist = {}
+        },
+        highlight = {
+            largeFileSize = 2097152,
+            lsRanges = false,
+            blacklist = {},
+            whitelist = {}
+        },
+        index = {
+            blacklist = {},
+            comments = 2,
+            initialNoLinkage = false,
+            initialBlacklist = {},
+            initialWhitelist = {},
+            maxInitializerLines = 5,
+            multiVersion = 0,
+            multiVersionBlacklist = {},
+            multiVersionWhitelist = {},
+            name = {
+                suppressUnwrittenScope = false
+            },
+            onChange = false,
+            parametersInDeclarations = true,
+            threads = 0,
+            trackDependency = 2,
+            whitelist = {},
+        },
+        request = {
+            timeout = 5000
+        },
+        session = {
+            maxNum = 10
+        },
+        workspaceSymbol = {
+            caseSensitivity = 1,
+            maxNum = 1000,
+            sort = true
+        },
+        xref = {
+            maxNum = 2000
+        }
+    };
+      -- cache= {
+						-- 					directory=".ccls-cache/";
+      --                          retainInMemory= 1;
+						-- 									 format ="json";
+						-- 									 hierarchicalPath = false
+      --                          };
+      --                        clang={
+      --               pathMappings={}
+						-- 				};
+      --               index = {
+      --                 onChange = false;
+      --                 trackDependency = 1;
+      --                         threads = 4
+      --                         };
+      --               completion = {
+      --                         caseSensitivity= 2;
+      --                         detailedLabel=true;
+      --                         filterAndSort=true
+      --                       };
+      --               highlight = {
+      --                         lsRanges= true
+      --                       };
+						-- client = {
+						-- 					snippetSupport=true
+						-- 				};
+      --             }
   }
 
   -- require('lspconfig').clangd.setup {
