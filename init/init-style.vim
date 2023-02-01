@@ -61,7 +61,7 @@ set termguicolors
 " let g:gruvbox_material_enable_bold = 1
 " let g:gruvbox_material_enable_italic = 1
 " let g:gruvbox_material_visual = 'reverse'
-colorscheme everforest
+colorscheme sonokai
 " let g:sonokai_style = 'espresso'
 " let g:sonokai_better_performance = 1
 

@@ -173,12 +173,12 @@ if index(g:bundle_group, 'basic') >= 0
 
 	" 一次性安装一大堆 colorscheme
 	" Plug 'flazz/vim-colorschemes'
-	Plug 'morhetz/gruvbox'
-  Plug 'sainnhe/gruvbox-material'
-  Plug 'ayu-theme/ayu-vim' 
-  Plug 'luisiacc/gruvbox-baby', {'branch': 'main'}
-  Plug 'rebelot/kanagawa.nvim'
-  Plug 'sainnhe/everforest'
+	" Plug 'morhetz/gruvbox'
+ "  Plug 'sainnhe/gruvbox-material'
+ "  Plug 'ayu-theme/ayu-vim' 
+ "  Plug 'luisiacc/gruvbox-baby', {'branch': 'main'}
+ "  Plug 'rebelot/kanagawa.nvim'
+ "  Plug 'sainnhe/everforest'
   Plug 'sainnhe/sonokai'
 	" Plug 'itchyny/landscape.vim'
 	" Plug 'kaicataldo/material.vim'
@@ -744,6 +744,10 @@ if index(g:bundle_group, 'wei-self') >= 0
   "
 	" " 缩进显示
 	" Plug 'Yggdroot/indentLine'
+  Plug 'rhysd/git-messenger.vim'
+  let g:git_messenger_always_into_popup = v:true
+  let g:git_messenger_no_default_mappings = v:true
+  nmap <leader>gm <Plug>(git-messenger);
   "
 	" ccls callHierarchy
 	Plug 'm-pilia/vim-ccls'
@@ -785,8 +789,8 @@ if index(g:bundle_group, 'wei-self') >= 0
     \           ColumnLimit: 100,
     \           AllowAllParametersOfDeclarationOnNextLine: false,
     \           AlignAfterOpenBracket: true}"'],
-    \ 'stdin' : 1,
-    \ 'stderr' : 1,
+    \ 'stdin' : 0,
+    \ 'stderr' : 0,
   \}
   " let g:neoformat_verbose = 1 " only affects the verbosity of Neoformat
   let g:neoformat_enabled_cpp = ['clangformat']
@@ -1141,6 +1145,7 @@ if index(g:bundle_group, 'lua') >= 0
   "   \'',
   "   \]
 
+    Plug 'TimUntersberger/neogit'
     Plug 'sindrets/diffview.nvim'
 
     Plug 'haringsrob/nvim_context_vt'
